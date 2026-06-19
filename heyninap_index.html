@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HeyNinaP — Viajes con presupuesto real</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --indigo: #5E7FCC;
+  --noche:  #0D0D0D;
+  --blanco: #FFFFFF;
+  --miel:   #D4A84B;
+  --piedra: #8A8A8A;
+  --niebla: #EBF0FF;
+  --sg:     'Space Grotesk', sans-serif;
+  --inter:  'Inter', system-ui, sans-serif;
+  --mano:   'Caveat', cursive;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--inter); background: var(--blanco); color: var(--noche); line-height: 1.6; overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(13,13,13,0.97); backdrop-filter: blur(8px);
+  padding: 0.875rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid #1c1c1c;
+}
+.nav-logo { display: flex; align-items: center; height: 32px; text-decoration: none; }
+.nav-logo svg { height: 32px; width: auto; }
+.nav-links { display: flex; gap: 1.5rem; list-style: none; }
+.nav-links a { font-size: 13px; color: var(--piedra); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--blanco); }
+.nav-ham { display: none; flex-direction: column; gap: 4px; cursor: pointer; background: none; border: none; padding: 4px; }
+.nav-ham span { width: 22px; height: 2px; background: var(--piedra); border-radius: 2px; transition: all 0.2s; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh; background: var(--noche);
+  display: flex; align-items: center;
+  padding: 7rem 2rem 5rem;
+  position: relative; overflow: hidden;
+}
+.hero-glow {
+  position: absolute; right: -200px; top: 50%; transform: translateY(-50%);
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(94,127,204,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner { max-width: 660px; position: relative; z-index: 2; }
+.hero-logo { height: 72px; width: auto; margin-bottom: 2.5rem; display: block; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--indigo); margin-bottom: 1.25rem;
+}
+.hero-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--indigo); }
+.hero-title {
+  font-family: var(--sg); font-size: clamp(40px, 6.5vw, 76px); font-weight: 700;
+  letter-spacing: -0.04em; line-height: 1.0; color: var(--blanco); margin-bottom: 0.25rem;
+}
+.hero-title-accent { color: var(--indigo); display: block; }
+.hero-mano { font-family: var(--mano); font-size: clamp(20px, 2.5vw, 28px); color: var(--miel); margin-bottom: 1.75rem; margin-top: 0.5rem; }
+.hero-body { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.85; max-width: 500px; }
+.hero-body strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+
+/* ── SECCIONES COMUNES ── */
+section { padding: 5rem 2rem; }
+.container { max-width: 900px; margin: 0 auto; }
+.eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--indigo); display: block; margin-bottom: 0.5rem; }
+.section-title { font-family: var(--sg); font-size: clamp(26px, 4vw, 40px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 1rem; }
+.section-title span { color: var(--indigo); }
+.section-body { font-size: 15px; color: #555; line-height: 1.8; max-width: 580px; }
+.divider { border: none; border-top: 1px solid #f0f0f0; }
+
+/* ── GOLDEN CIRCLE ── */
+.gc-section { background: var(--blanco); }
+.gc-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: #dce8ff; border: 1px solid #dce8ff; border-radius: 12px; overflow: hidden; margin-top: 2.5rem; }
+.gc-block { background: var(--niebla); padding: 2.25rem 2rem; }
+.gc-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--indigo); margin-bottom: 0.875rem; display: flex; align-items: center; gap: 8px; }
+.gc-tag::after { content: ''; flex: 1; height: 1px; background: #ccd9f5; }
+.gc-text { font-size: 14px; color: #333; line-height: 1.8; }
+.gc-text strong { color: var(--noche); font-weight: 600; }
+.gc-tagline-wrap { padding: 1.75rem 2rem; background: var(--indigo); text-align: center; }
+.gc-tagline { font-family: var(--sg); font-size: clamp(15px, 2.2vw, 20px); font-weight: 700; color: var(--blanco); letter-spacing: -0.02em; line-height: 1.4; }
+.gc-tagline span { color: var(--miel); }
+
+/* ── SOBRE MÍ ── */
+.sobre-section { background: #fafafa; }
+.sobre-grid { display: grid; grid-template-columns: 420px 1fr; gap: 4rem; align-items: center; }
+.sobre-photo-wrap { position: relative; }
+.sobre-photo {
+  width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top;
+  border-radius: 12px; display: block;
+}
+.sobre-photo-badge {
+  position: absolute; bottom: 1.25rem; left: 1.25rem;
+  background: var(--noche); border-radius: 8px; padding: 0.625rem 0.875rem;
+}
+.sobre-badge-hand { font-family: var(--mano); font-size: 15px; color: var(--miel); }
+.sobre-badge-sub { font-size: 10px; color: var(--piedra); margin-top: 1px; }
+.sobre-title { font-family: var(--sg); font-size: clamp(24px, 3vw, 36px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 1.25rem; }
+.sobre-title span { color: var(--indigo); }
+.sobre-body { font-size: 15px; color: #444; line-height: 1.85; margin-bottom: 1.25rem; }
+.sobre-quote { font-family: var(--mano); font-size: 19px; color: var(--indigo); border-left: 3px solid var(--indigo); padding-left: 1rem; margin-bottom: 1.25rem; line-height: 1.5; }
+.creds { display: flex; flex-wrap: wrap; gap: 7px; }
+.miedos-box { margin-top: 1.5rem; background: var(--noche); border-radius: 10px; padding: 1.25rem 1.5rem; border-left: 3px solid var(--miel); }
+.miedos-title { font-family: var(--sg); font-size: 13px; font-weight: 700; color: var(--miel); letter-spacing: 0.04em; margin-bottom: 0.875rem; }
+.miedos-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.miedos-list li { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.65; padding-left: 1rem; position: relative; }
+.miedos-list li::before { content: '→'; position: absolute; left: 0; color: var(--miel); font-weight: 600; }
+.cred { font-size: 12px; font-weight: 500; padding: 4px 11px; background: var(--niebla); color: var(--indigo); border-radius: 4px; }
+
+/* ── VALIDACIÓN ── */
+.val-section { background: var(--blanco); }
+.val-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 2.5rem; }
+.val-card { border-radius: 10px; padding: 1.5rem; border: 1px solid #eee; }
+.val-yes { background: var(--blanco); border-color: #dce8ff; border-top: 2px solid var(--indigo); }
+.val-conclu { background: var(--noche); border-color: var(--noche); }
+.val-header { display: flex; align-items: center; gap: 10px; margin-bottom: 0.75rem; }
+.val-check { width: 24px; height: 24px; border-radius: 50%; background: var(--indigo); color: white; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.val-question { font-family: var(--sg); font-size: 14px; font-weight: 700; color: var(--noche); letter-spacing: -0.01em; }
+.val-answer { font-size: 13px; color: #555; line-height: 1.75; }
+.val-answer em { font-style: italic; color: var(--indigo); }
+
+/* VOZ DE MARCA */
+.voz-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 2.5rem; }
+.voz-bloque { background: var(--niebla); border-radius: 10px; padding: 1.25rem 1.5rem; }
+.voz-titulo { font-family: var(--sg); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--indigo); margin-bottom: 0.625rem; }
+.voz-item { font-size: 13px; color: #444; line-height: 1.7; margin-bottom: 4px; }
+.voz-tagline { font-family: 'Caveat', cursive; font-size: 15px; color: var(--indigo); font-style: italic; margin-top: 6px; }
+.voz-preguntas { background: var(--noche); }
+.voz-preguntas .voz-titulo { color: var(--miel); }
+.voz-pregunta { font-family: var(--sg); font-size: 13px; color: rgba(255,255,255,0.85); padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.voz-pregunta:last-of-type { border-bottom: none; }
+.voz-no { background: #fff5f5; border: 1px solid #fdd; }
+.voz-no-item { font-size: 13px; color: #555; padding: 5px 0; border-bottom: 1px solid #f5e0e0; line-height: 1.5; }
+.voz-no-item:last-child { border-bottom: none; }
+.hash-tag { font-weight: 600; color: var(--indigo); }
+
+/* TRAMPAS */
+.trampas-section { background: var(--blanco); }
+.trampas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 2.5rem; }
+.trampa-card { background: var(--niebla); border-radius: 12px; padding: 1.5rem; border-left: 3px solid var(--indigo); position: relative; }
+.trampa-num { font-family: var(--sg); font-size: 11px; font-weight: 700; color: var(--indigo); opacity: 0.5; display: block; margin-bottom: 6px; letter-spacing: 0.1em; }
+.trampa-titulo { font-family: var(--sg); font-size: 15px; font-weight: 700; color: var(--noche); margin-bottom: 10px; }
+.trampa-texto { font-size: 13px; color: #555; line-height: 1.75; }
+
+/* PROMESA */
+.promesa-section { background: var(--noche); }
+.promesa-section .eyebrow { color: var(--miel); opacity: 0.7; }
+.promesa-section .section-title { color: var(--blanco); }
+.promesa-box { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 2rem 2.5rem; margin: 2rem 0; }
+.promesa-formula { font-size: 18px; color: rgba(255,255,255,0.85); line-height: 1.7; font-family: var(--inter); }
+.promesa-formula span { color: var(--miel); font-weight: 500; }
+.cliente-voz-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 0.5rem; }
+.cliente-voz-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1.25rem 1.5rem; }
+.cliente-voz-q { font-family: var(--sg); font-size: 12px; font-weight: 700; color: var(--miel); margin-bottom: 0.75rem; line-height: 1.4; }
+.cliente-voz-a { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.75; }
+
+/* PILARES */
+.pilares-section { background: var(--blanco); }
+.pilares-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 2.5rem; }
+.pilar-item { background: var(--niebla); border-radius: 12px; padding: 1.5rem 1.25rem; }
+.pilar-icon { font-family: var(--sg); font-size: 28px; font-weight: 700; color: var(--indigo); opacity: 0.25; margin-bottom: 0.75rem; }
+.pilar-nombre { font-family: var(--sg); font-size: 15px; font-weight: 700; color: var(--noche); margin-bottom: 0.625rem; }
+.pilar-desc { font-size: 12px; color: #555; line-height: 1.7; margin-bottom: 0.875rem; }
+.pilar-orden { font-size: 11px; color: var(--indigo); font-style: italic; border-top: 1px solid rgba(94,127,204,0.2); padding-top: 0.625rem; }
+.pilares-estructura { margin-top: 2.5rem; background: var(--noche); border-radius: 14px; padding: 2rem; }
+.pe-titulo { font-family: var(--sg); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--miel); margin-bottom: 1.5rem; }
+.pe-grid { display: flex; align-items: flex-start; gap: 16px; }
+.pe-paso { flex: 1; }
+.pe-flecha { color: var(--miel); font-size: 20px; padding-top: 8px; flex-shrink: 0; }
+.pe-num { font-family: var(--sg); font-size: 11px; color: var(--miel); font-weight: 700; display: block; margin-bottom: 4px; }
+.pe-nombre { font-family: var(--sg); font-size: 14px; font-weight: 700; color: var(--blanco); margin-bottom: 6px; }
+.pe-desc { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.65; }
+
+/* ENTREVISTAS PENDIENTES */
+.entrevistas-nota { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-left: 3px solid var(--miel); border-radius: 12px; padding: 1.75rem 2rem; margin-top: 0.5rem; }
+.en-icon { font-size: 20px; margin-bottom: 0.625rem; }
+.en-titulo { font-family: var(--sg); font-size: 15px; font-weight: 700; color: var(--blanco); margin-bottom: 0.625rem; }
+.en-texto { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.75; margin-bottom: 1.25rem; }
+.en-preguntas { display: flex; gap: 10px; flex-wrap: wrap; }
+.en-q { font-size: 12px; color: var(--miel); border: 1px solid rgba(212,168,75,0.3); border-radius: 20px; padding: 4px 12px; font-style: italic; }
+
+/* DOLORES Y DESEOS */
+.dd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.dd-card { border-radius: 12px; padding: 1.5rem; }
+.dd-dolores { background: #fff8f8; border: 1px solid #f5dada; }
+.dd-deseos { background: #f6faff; border: 1px solid #dce8ff; }
+.dd-titulo { font-family: var(--sg); font-size: 13px; font-weight: 700; margin-bottom: 1rem; color: var(--noche); }
+.dd-item { font-size: 13px; color: #555; line-height: 1.65; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.dd-item:last-child { border-bottom: none; }
+
+/* PILAR EJEMPLOS */
+.pilar-ejemplos { margin-top: 0.875rem; border-top: 1px solid rgba(94,127,204,0.15); padding-top: 0.75rem; }
+.pe-ej { font-size: 11px; color: var(--indigo); line-height: 1.5; padding: 3px 0; font-style: italic; }
+
+/* MÉTODO DE PUBLICACIÓN */
+.metodo-pub { margin-top: 2rem; background: var(--niebla); border-radius: 14px; padding: 2rem; }
+.metodo-grid { display: flex; gap: 14px; align-items: flex-start; margin-top: 1.25rem; }
+.metodo-paso { flex: 1; background: var(--blanco); border-radius: 10px; padding: 1.25rem; border-top: 3px solid var(--indigo); }
+.metodo-num { font-family: var(--sg); font-size: 11px; font-weight: 700; color: var(--indigo); display: block; margin-bottom: 4px; letter-spacing: 0.08em; }
+.metodo-pilar { font-family: var(--sg); font-size: 14px; font-weight: 700; color: var(--noche); margin-bottom: 6px; }
+.metodo-desc { font-size: 12px; color: #555; line-height: 1.65; }
+.metodo-sep { color: var(--indigo); font-size: 20px; padding-top: 40px; flex-shrink: 0; }
+
+/* ESTRUCTURA DARK EJEMPLOS */
+.pe-ejemplos { margin-top: 0.75rem; }
+.pe-ej-dark { font-size: 11px; color: rgba(255,255,255,0.55); font-style: italic; padding: 3px 0; line-height: 1.5; }
+
+/* VENEDE */
+.venede-section { background: var(--noche); }
+.venede-section .eyebrow { color: var(--miel); opacity: 0.7; }
+.venede-section .section-title { color: var(--blanco); }
+.venede-section .section-body { color: rgba(255,255,255,0.5); }
+.venede-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 2.5rem; }
+.venede-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem; }
+.venede-letra { font-family: var(--sg); font-size: 32px; font-weight: 700; color: var(--miel); opacity: 0.4; display: block; margin-bottom: 4px; }
+.venede-nombre { font-family: var(--sg); font-size: 15px; font-weight: 700; color: var(--blanco); margin-bottom: 8px; }
+.venede-desc { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 10px; }
+.venede-ej { font-size: 12px; color: var(--miel); font-style: italic; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px; }
+
+@media (max-width: 768px) {
+  .voz-grid { grid-template-columns: 1fr; }
+  .trampas-grid { grid-template-columns: 1fr; }
+  .cliente-voz-grid { grid-template-columns: 1fr; }
+  .dd-grid { grid-template-columns: 1fr; }
+  .metodo-grid { flex-direction: column; }
+  .metodo-sep { display: none; }
+  .venede-grid { grid-template-columns: 1fr; }
+  .pilares-grid { grid-template-columns: 1fr 1fr; }
+  .pe-grid { flex-direction: column; }
+  .pe-flecha { display: none; }
+}
+.val-data { margin-top: 0.875rem; padding-top: 0.875rem; border-top: 1px solid #eee; display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px; }
+.val-stat { font-family: var(--sg); font-size: 18px; font-weight: 700; color: var(--indigo); letter-spacing: -0.02em; }
+.val-stat-label { font-size: 11px; color: var(--piedra); }
+.val-source { color: var(--indigo); text-decoration: underline; text-underline-offset: 2px; font-weight: 500; transition: opacity 0.15s; }
+.val-source:hover { opacity: 0.7; }
+
+/* ── POSICIONAMIENTO ── */
+.pos-section { background: #F7F9FF; }
+.pos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 2.5rem; }
+.pos-card { background: var(--blanco); border: 1px solid #dce8ff; border-radius: 10px; padding: 1.5rem; }
+.pos-card:first-child { background: var(--niebla); border: 1.5px solid var(--indigo); }
+.pos-card:last-child { background: var(--indigo); border-color: var(--indigo); }
+.pos-card:last-child .pos-label { color: rgba(255,255,255,0.6); }
+.pos-card:last-child .pos-title { color: var(--blanco); }
+.pos-card:last-child .pos-body { color: rgba(255,255,255,0.75); }
+.pos-label { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--indigo); margin-bottom: 0.625rem; }
+.pos-title { font-family: var(--sg); font-size: 15px; font-weight: 700; color: var(--noche); margin-bottom: 0.5rem; }
+.pos-body { font-size: 13px; color: #666; line-height: 1.7; }
+.avatar-grid { display: grid; grid-template-columns: 220px 1fr; gap: 1.5rem; margin-top: 0.875rem; align-items: start; }
+.avatar-profile { }
+.avatar-img-wrap { border-radius: 16px; overflow: hidden; }
+.avatar-pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.pilar-card { background: var(--blanco); border: 1px solid #dce8ff; border-top: 2px solid var(--indigo); border-radius: 8px; padding: 0.75rem; }
+.pilar-num { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--indigo); margin-bottom: 4px; }
+.pilar-text { font-size: 12px; color: #555; line-height: 1.55; }
+.analisis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 0.875rem; }
+.analisis-card { background: var(--blanco); border: 1px solid #dce8ff; border-radius: 10px; padding: 1.5rem; }
+.analisis-icon { font-size: 16px; color: var(--indigo); margin-bottom: 0.5rem; }
+.analisis-title { font-family: var(--sg); font-size: 14px; font-weight: 700; color: var(--noche); margin-bottom: 0.875rem; }
+.analisis-list { padding-left: 1rem; display: flex; flex-direction: column; gap: 6px; margin-bottom: 0.875rem; }
+.analisis-list li { font-size: 13px; color: #555; line-height: 1.6; }
+.analisis-quote { font-family: var(--mano); font-size: 16px; color: var(--indigo); border-left: 2px solid var(--indigo); padding-left: 0.75rem; line-height: 1.4; }
+.analisis-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.analisis-bottom-card { background: var(--niebla); border-radius: 10px; padding: 1.5rem; }
+.analisis-bottom-label { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--indigo); margin-bottom: 0.625rem; }
+.analisis-bottom-text { font-size: 13px; color: #444; line-height: 1.7; }
+.valores-wrap { margin-bottom: 2.5rem; }
+.valores-label { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--indigo); margin-bottom: 0.875rem; }
+.valores-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.valor-card { background: var(--blanco); border: 1px solid #dce8ff; border-top: 3px solid var(--indigo); border-radius: 8px; padding: 1.25rem 1rem; }
+.valor-name { font-family: var(--sg); font-size: 13px; font-weight: 700; color: var(--noche); margin-bottom: 6px; }
+.valor-desc { font-size: 12px; color: #666; line-height: 1.6; }
+
+/* ── PLATAFORMAS ── */
+.plat-section { background: var(--blanco); }
+.plat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 2.5rem; }
+.plat-card {
+  background: var(--blanco); border: 1px solid #eee; border-radius: 10px;
+  padding: 1.75rem; text-align: center; text-decoration: none; color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  display: block;
+}
+.plat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(94,127,204,0.1); border-color: #dce8ff; }
+.plat-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+.plat-name { font-family: var(--sg); font-size: 16px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; }
+.plat-handle { font-size: 13px; color: var(--indigo); font-weight: 500; }
+
+/* ── IDENTIDAD ── */
+.id-section { background: #fafafa; }
+.id-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2.5rem; align-items: start; }
+.id-sub { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--indigo); margin-bottom: 0.75rem; margin-top: 1.5rem; }
+.id-sub:first-child { margin-top: 0; }
+.colores-row { display: flex; gap: 8px; }
+.color-sw { flex: 1; }
+.color-dot { height: 44px; border-radius: 6px; margin-bottom: 5px; border: 1px solid rgba(0,0,0,0.06); }
+.color-name { font-size: 11px; font-weight: 500; color: var(--noche); line-height: 1.2; }
+.color-hex { font-family: monospace; font-size: 10px; color: var(--piedra); }
+.tipo-row { padding: 10px 0; border-bottom: 1px solid #eee; }
+.tipo-row:last-child { border-bottom: none; }
+.tipo-label { font-size: 10px; color: var(--piedra); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; margin-bottom: 3px; }
+.logo-variants { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.logo-var { border-radius: 10px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+.logo-var svg { height: 52px; width: auto; }
+.logo-var-label { font-size: 10px; color: var(--piedra); text-align: center; font-family: monospace; }
+.tono-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.tono-pill { font-size: 12px; font-weight: 500; padding: 4px 12px; background: var(--blanco); border-radius: 3px; color: var(--noche); border: 1px solid #eee; }
+
+/* ── CTA FINAL ── */
+.cta-section { background: var(--noche); text-align: center; padding: 5rem 2rem; }
+.cta-inner { max-width: 560px; margin: 0 auto; }
+.cta-mano { font-family: var(--mano); font-size: 20px; color: var(--miel); margin-bottom: 0.875rem; }
+.cta-title { font-family: var(--sg); font-size: clamp(24px, 4.5vw, 46px); font-weight: 700; letter-spacing: -0.04em; line-height: 1.05; color: var(--blanco); margin-bottom: 2rem; }
+.cta-title span { color: var(--indigo); }
+.cta-links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.btn-primary { font-family: var(--sg); font-size: 13px; font-weight: 600; padding: 11px 22px; background: var(--indigo); color: var(--blanco); border-radius: 4px; text-decoration: none; transition: opacity 0.2s; display: inline-block; }
+.btn-primary:hover { opacity: 0.85; }
+.btn-outline { font-family: var(--sg); font-size: 13px; font-weight: 600; padding: 11px 22px; background: transparent; color: var(--blanco); border: 1px solid #333; border-radius: 4px; text-decoration: none; transition: border-color 0.2s; display: inline-block; }
+.btn-outline:hover { border-color: var(--indigo); }
+
+/* ── FOOTER ── */
+footer {
+  background: #080808; padding: 1.5rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem; border-top: 1px solid #1a1a1a;
+}
+.footer-logo { display: flex; align-items: center; height: 24px; }
+.footer-logo svg { height: 24px; width: auto; }
+.footer-right { display: flex; align-items: center; gap: 1rem; }
+.footer-copy { font-size: 12px; color: #333; }
+.footer-hidden-link { font-size: 11px; color: #252525; text-decoration: none; transition: color 0.2s; font-family: var(--inter); }
+.footer-hidden-link:hover { color: var(--indigo); }
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  .sobre-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .sobre-photo { aspect-ratio: 4/3; object-position: center 20%; }
+  .gc-grid { grid-template-columns: 1fr; }
+  .valores-cards { grid-template-columns: 1fr 1fr; }
+  .analisis-grid { grid-template-columns: 1fr; }
+  .analisis-bottom { grid-template-columns: 1fr; }
+  .avatar-grid { grid-template-columns: 1fr; }
+  .avatar-pillars { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 680px) {
+  nav { padding: 0.875rem 1.25rem; }
+  .nav-links { display: none; }
+  .nav-ham { display: flex; }
+  section { padding: 4rem 1.25rem; }
+  .hero { padding: 6rem 1.25rem 4rem; }
+  .hero-logo { height: 56px; }
+  .pos-grid { grid-template-columns: 1fr; }
+  .val-grid { grid-template-columns: 1fr; }
+  .plat-grid { grid-template-columns: 1fr; }
+  .id-grid { grid-template-columns: 1fr; }
+  .logo-variants { grid-template-columns: 1fr 1fr; }
+  .analisis-grid { grid-template-columns: 1fr; }
+  .analisis-bottom { grid-template-columns: 1fr; }
+  .avatar-pillars { grid-template-columns: 1fr; }
+  footer { flex-direction: column; text-align: center; gap: 0.75rem; }
+  .footer-right { flex-direction: column; gap: 0.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#inicio" class="nav-logo">
+    <svg viewBox="0 0 1048 1091" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#ebf0ff" d="M555.05,260.67c-15.54,22.66-29.82,44.85-42.83,68.65-43.27,79.16-67.91,166.33-71.38,256.55v53.27c1.79,49.63,9.55,97.69,20.61,146,5.87,25.64,10.01,58.69-15.5,69.74-31.46,13.62-63.15-.46-89.11-20.8-62-48.58-123.35-148.37-166.12-216.74l-41.99-67.11c-24.52-39.19-48.14-77.89-70.69-118.18l-20.56-32.5c-10.69-16.9-17.36-35.06,0-46.19,9.97-6.39,21.62-7.81,33.49-8.53,23.88-1.43,45.3,6.7,63.65,21.51,14.92,12.04,28.28,24.62,40.33,39.75,15.44,19.37,28.74,39.24,41.27,60.69l40.6,69.46,41.72,69.13,10.09,14.16c1.32-6.34-.55-10.89-.51-16.73.4-53.09,6.46-105.62,18.14-157.6,12.88-57.32,33.74-111.69,61.65-163.2,19.81-36.56,41.7-71.08,67.2-103.78,13.51-17.33,27.47-32.71,43.02-48.06,13.32-13.16,27.36-23.84,44.95-31.25,38.31-16.14,81.38-18.54,121.11-6.16,29.66,9.24,51.76,31.43,61.29,60.65,15.83,48.54,3.19,110.56-11.36,159.92l24.56-13.69,51.38-36.62c41.43-29.53,89.9-67.52,135.95-86.91,20.4-8.59,46.46-13.53,53.35,8.63,1.67,5.37,2.47,11.17,0,16.64-5.85,12.96-13.14,24.79-22.33,35.62l-23.05,27.14c-30.52,32.86-63.73,61.95-98.63,90.16l-39.86,32.21c-16.18,13.08-32.57,24.81-50.58,35.27-36.25,21.05-74.92,32.49-115.83,20.23-10.41-3.12-18.39-9.1-23.45-18.78-17.86-34.15-3.79-94.8,6.11-133.46,5.82-22.74,11.86-44.51,15.24-67.68,1.26-8.61,1.6-17.01-1.13-24.81-1.83-5.23-6.56-7.55-11.92-7.12-34.87,2.83-59.61,42.39-78.89,70.5Z"/>
+      <path fill="#ebf0ff" d="M195.96,807.78c-22.14,11.23-61.5-.15-81.71-16.86-16.78-13.88-23.66-36.05-15.6-56.14,3.52-8.79,10.01-14.97,18.79-18.32,24.94-9.53,52.62-2.24,70.03,18.2,19.14,22.48,28.47,63,8.49,73.13Z"/>
+    </svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#golden-circle">Por qué</a></li>
+    <li><a href="#sobre">Sobre mí</a></li>
+    <li><a href="#validacion">Validación</a></li>
+    <li><a href="#posicionamiento">Marca</a></li>
+    <li><a href="#plataformas">Plataformas</a></li>
+    <li><a href="#trampas">Aprendizajes</a></li>
+    <li><a href="#pilares">Contenido</a></li>
+  </ul>
+  <button class="nav-ham" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="inicio">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <svg class="hero-logo" viewBox="0 0 1048 1091" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#5e7fcc" d="M555.05,260.67c-15.54,22.66-29.82,44.85-42.83,68.65-43.27,79.16-67.91,166.33-71.38,256.55v53.27c1.79,49.63,9.55,97.69,20.61,146,5.87,25.64,10.01,58.69-15.5,69.74-31.46,13.62-63.15-.46-89.11-20.8-62-48.58-123.35-148.37-166.12-216.74l-41.99-67.11c-24.52-39.19-48.14-77.89-70.69-118.18l-20.56-32.5c-10.69-16.9-17.36-35.06,0-46.19,9.97-6.39,21.62-7.81,33.49-8.53,23.88-1.43,45.3,6.7,63.65,21.51,14.92,12.04,28.28,24.62,40.33,39.75,15.44,19.37,28.74,39.24,41.27,60.69l40.6,69.46,41.72,69.13,10.09,14.16c1.32-6.34-.55-10.89-.51-16.73.4-53.09,6.46-105.62,18.14-157.6,12.88-57.32,33.74-111.69,61.65-163.2,19.81-36.56,41.7-71.08,67.2-103.78,13.51-17.33,27.47-32.71,43.02-48.06,13.32-13.16,27.36-23.84,44.95-31.25,38.31-16.14,81.38-18.54,121.11-6.16,29.66,9.24,51.76,31.43,61.29,60.65,15.83,48.54,3.19,110.56-11.36,159.92l24.56-13.69,51.38-36.62c41.43-29.53,89.9-67.52,135.95-86.91,20.4-8.59,46.46-13.53,53.35,8.63,1.67,5.37,2.47,11.17,0,16.64-5.85,12.96-13.14,24.79-22.33,35.62l-23.05,27.14c-30.52,32.86-63.73,61.95-98.63,90.16l-39.86,32.21c-16.18,13.08-32.57,24.81-50.58,35.27-36.25,21.05-74.92,32.49-115.83,20.23-10.41-3.12-18.39-9.1-23.45-18.78-17.86-34.15-3.79-94.8,6.11-133.46,5.82-22.74,11.86-44.51,15.24-67.68,1.26-8.61,1.6-17.01-1.13-24.81-1.83-5.23-6.56-7.55-11.92-7.12-34.87,2.83-59.61,42.39-78.89,70.5Z"/>
+      <path fill="#d4a84b" d="M195.96,807.78c-22.14,11.23-61.5-.15-81.71-16.86-16.78-13.88-23.66-36.05-15.6-56.14,3.52-8.79,10.01-14.97,18.79-18.32,24.94-9.53,52.62-2.24,70.03,18.2,19.14,22.48,28.47,63,8.49,73.13Z"/>
+    </svg>
+    <p class="hero-eyebrow">HeyNinaP · Viajes con presupuesto real</p>
+    <h1 class="hero-title">
+      Viajo sola.
+      <span class="hero-title-accent">Sin excusas.</span>
+    </h1>
+    <p class="hero-mano">con lo que tengo, a donde quiero.</p>
+    <p class="hero-body">
+      Soy Nina, soy uruguaya. Recorro capitales europeas y el mundo en modo mochilera — con <strong>presupuesto real</strong>, sin lujos que no valen la pena, y sin perderme nada que sí vale.<br><br>
+      Esta cuenta existe para que <strong>ninguna mujer deje de ver el mundo</strong> por las mismas limitaciones que yo tuve que derribar para empezar.
+    </p>
+  </div>
+</section>
+
+<!-- ── SOBRE MÍ ── -->
+<section class="sobre-section" id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-photo-wrap reveal">
+        <img src="yo.jpeg" alt="Nina en el Puente de Brooklyn, Nueva York" class="sobre-photo">
+        <div class="sobre-photo-badge">
+          <p class="sobre-badge-hand">Brooklyn Bridge, NY</p>
+          <p class="sobre-badge-sub">@hey.ninap</p>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:0.1s;">
+        <span class="eyebrow">Sobre mí</span>
+        <h2 class="sobre-title">Nina.<br><span>Uruguaya.</span><br>Viajera sola.</h2>
+        <p class="sobre-body">No me crié viajando. En mi infancia, los viajes eran la excepción — dos o tres veces en total, siempre con ayuda de otros. En 2020, un momento de quiebre personal me llevó a preguntarme de verdad qué historia quería estar contando.</p>
+        <p class="sobre-quote">"Viajo porque esta es la historia que yo quiero contar de mi vida."</p>
+        <p class="sobre-body">En 2018 hice mi primer viaje sola — con los recursos que tenía, sin red de seguridad, sin saber bien cómo. Y en lugar de cerrarme, me abrió algo. Hoy recorro el mundo con presupuesto real y comparto exactamente lo que aprendí para que otras mujeres no tengan que aprenderlo solas.</p>
+        <div class="creds">
+          <span class="cred">+20 capitales europeas</span>
+          <span class="cred">Partes de EEUU</span>
+          <span class="cred">Modo mochilera</span>
+          <span class="cred">Presupuesto real</span>
+          <span class="cred">Siempre sola</span>
+        </div>
+
+        <div class="miedos-box">
+          <p class="miedos-title">Chau miedos <span style="font-family:'Caveat',cursive;font-size:18px;font-weight:400;">✓</span></p>
+          <ul class="miedos-list">
+            <li>Mostrarme es el trabajo. Cada vez que publico, alguien que me necesitaba me encuentra.</li>
+            <li>Construyo valor antes de pedir que compren. La audiencia que llega convencida no necesita que la convenza.</li>
+            <li>Las que opinan no son las que viajan. Las que viajan están demasiado ocupadas viviendo para juzgar.</li>
+            <li>Voy a mi ritmo. Esta marca se construye desde el disfrute, no desde la obligación.</li>
+            <li>Tengo más de 20 capitales europeas recorridas sola, con presupuesto real. Tengo una red que me empuja. Y tengo el conocimiento para dar lo que prometo.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="divider">
+
+<!-- ── GOLDEN CIRCLE ── -->
+<section class="gc-section" id="golden-circle">
+  <div class="container">
+    <span class="eyebrow">Golden Circle — Simon Sinek</span>
+    <h2 class="section-title">Por qué hago<br><span>lo que hago.</span></h2>
+    <div class="gc-grid reveal">
+      <div class="gc-block">
+        <p class="gc-tag">Por qué</p>
+        <p class="gc-text">Porque hay mujeres que quieren viajar y no lo hacen. No porque no puedan — sino porque <strong>nadie les mostró que pueden.</strong> Creen que necesitan más dinero, más tiempo, o a alguien que las acompañe. Yo lo creía también. Mi misión es que ninguna mujer deje de ver el mundo por las mismas limitaciones que yo tuve que derribar.</p>
+      </div>
+      <div class="gc-block">
+        <p class="gc-tag">Cómo</p>
+        <p class="gc-text">Con información honesta, sin filtros y sin romanticismos. Muestro lo que cuesta de verdad, los barrios donde conviene quedarse, los trucos que usan los locales y los errores que yo ya cometí. Pero también hablo de lo que las guías no dicen: cómo es estar sola en una ciudad que no conocés, y por qué eso <strong>es exactamente lo que te transforma.</strong></p>
+      </div>
+      <div class="gc-block">
+        <p class="gc-tag">Qué</p>
+        <p class="gc-text">Acompaño a mujeres a animarse a descubrir el mundo solas — con lo que tienen, desde donde están, sin esperar las condiciones perfectas. <strong>Yo también creí que necesitaba más dinero, más tiempo, o alguien que me acompañara.</strong> No era verdad.</p>
+      </div>
+    </div>
+    <div class="gc-tagline-wrap">
+      <p class="gc-tagline">Para que la única razón por la que no viajes sea que <span>todavía no compraste el pasaje.</span></p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── PROMESA + CLIENTE ── -->
+<section class="promesa-section" id="promesa">
+  <div class="container">
+    <span class="eyebrow">Mi propuesta de valor</span>
+    <h2 class="section-title">La promesa<br><span>que hago.</span></h2>
+
+    <div class="promesa-box reveal">
+      <p class="promesa-formula">Ayudo a <span>mujeres latinoamericanas que quieren viajar solas a Europa con presupuesto real</span> a animarse y hacerlo, a través de <span>información honesta, sin filtros ni romanticismos</span>, que ninguna otra cuenta en español les da.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── VALIDACIÓN ── -->
+<section class="val-section" id="validacion">
+  <div class="container">
+    <span class="eyebrow">Chequeo de oportunidad de crecimiento</span>
+    <h2 class="section-title">Por qué este negocio<br><span>tiene sentido.</span></h2>
+    <p class="section-body">Antes de construir la marca, me hice las preguntas que hay que hacerse. Estas son mis respuestas — con los números que las respaldan.</p>
+
+    <div class="val-grid reveal">
+
+      <div class="val-card val-yes">
+        <div class="val-header"><span class="val-check">✓</span><p class="val-question">¿Hay demanda real?</p></div>
+        <p class="val-answer">Sí. El español es la tercera lengua más usada en internet — más de 485 millones de hablantes nativos. Cuando busco "cuánto cuesta viajar a Europa" en YouTube en español, encuentro canales con millones de vistas pero casi ninguno que hable de viaje sola con presupuesto latinoamericano real. La demanda existe y está mal atendida: los comentarios en esos videos son mi prueba — <em>"¿pero cuánto gastaste de verdad?"</em> aparece en todos.</p>
+        <div class="val-data"><span class="val-stat">485M+</span><span class="val-stat-label">hispanohablantes nativos · <a href="https://cvc.cervantes.es/lengua/anuario/anuario_20/informes_ic/p06.htm" target="_blank" rel="noopener" class="val-source">Instituto Cervantes</a></span><span class="val-stat" style="margin-left:1rem;">3°</span><span class="val-stat-label">lengua más usada en internet · <a href="https://es.statista.com/estadisticas/1073677/usuarios-internet-pais-america-latina" target="_blank" rel="noopener" class="val-source">Statista 2025</a></span></div>
+      </div>
+
+      <div class="val-card val-yes">
+        <div class="val-header"><span class="val-check">✓</span><p class="val-question">¿Le estoy hablando al público correcto?</p></div>
+        <p class="val-answer">Sí. Solo en Argentina, Colombia, México y Perú hay más de 220 millones de usuarios de internet. Según Visa, los latinoamericanos priorizan Europa y EEUU como destinos internacionales porque los asocian con una experiencia aspiracional — y el turismo latinoamericano hacia Europa creció un 5,2% en plazas aéreas durante 2025. Mi audiencia no solo existe: está viajando más. Solo le falta saber cómo hacerlo con lo que tiene.</p>
+        <div class="val-data"><span class="val-stat">+5,2%</span><span class="val-stat-label">plazas aéreas LATAM → Europa en 2025 · <a href="https://www.ladevi.info/manual-europa-y-destinos-exoticos/el-gps-del-turismo-europa-y-el-rol-estrategico-latinoamerica-n96351" target="_blank" rel="noopener" class="val-source">ladevi.info 2026</a></span></div>
+      </div>
+
+      <div class="val-card val-yes">
+        <div class="val-header"><span class="val-check">✓</span><p class="val-question">¿Estoy vendiendo en el lugar correcto?</p></div>
+        <p class="val-answer">Sí. TikTok e Instagram son las plataformas principales de consumo de contenido para mujeres latinoamericanas de 25-38 años. YouTube me da el evergreen: cada búsqueda de "cuánto cuesta Budapest" o "guía Varsovia presupuesto" es tráfico que me puede encontrar durante años. Europa recibió 793 millones de turistas en 2025 — el récord histórico. No es un mercado que está bajando. Estoy subiendo a un tren que ya arrancó.</p>
+        <div class="val-data"><span class="val-stat">793M</span><span class="val-stat-label">turistas recibió Europa en 2025 — récord histórico · <a href="https://americaretail-malls.com/paises/brasil/ranking-turistico-2025-los-destinos-lideres-de-america-latina/" target="_blank" rel="noopener" class="val-source">ONU Turismo vía AmericaRetail 2026</a></span></div>
+      </div>
+
+      <div class="val-card val-yes">
+        <div class="val-header"><span class="val-check">✓</span><p class="val-question">¿Mi oferta y mensaje son claros?</p></div>
+        <p class="val-answer">Sí — y tuve que trabajarlo. "Viajera uruguaya que comparte sus aventuras por Europa" no dice nada: no queda claro para quién, para qué, ni por qué es diferente. Mi posicionamiento actual es otro: guías de viaje sola a capitales europeas con presupuesto real, en español, sin filtros ni romanticismos, para mujeres latinoamericanas. Queda claro quién soy, para quién hablo, por qué soy diferente — y excluye a quien no es mi cliente.</p>
+        <div class="val-data"><span class="val-stat-label" style="font-style:italic;color:var(--indigo);">"El nicho dice a quién. El posicionamiento dice cómo hablarle." — Método Queen</span></div>
+      </div>
+
+      <div class="val-card val-yes">
+        <div class="val-header"><span class="val-check">✓</span><p class="val-question">¿Mi negocio tiene techo?</p></div>
+        <p class="val-answer">No. El mercado hispanohablante en internet son más de 480 millones de personas y sigue creciendo. El contenido es digital y no depende de mi presencia física — un video de Budapest me genera visitas durante años. No estoy atada a horas presenciales ni a un mercado local. Puedo crecer desde cualquier lugar del mundo — que es exactamente de lo que trata esta marca.</p>
+        <div class="val-data"><span class="val-stat">480M+</span><span class="val-stat-label">hispanohablantes en internet · <a href="https://100seguidores.com/blog/cuantos-usuarios-de-internet-hay-en-el-mundo/" target="_blank" rel="noopener" class="val-source">Statista vía 100seguidores 2025</a></span></div>
+      </div>
+
+      <div class="val-card val-conclu">
+        <div class="val-header"><span class="val-check" style="background:var(--miel);color:var(--noche);">→</span><p class="val-question" style="color:var(--blanco);">Mi cajita de afirmaciones</p></div>
+        <p style="font-size:14px;color:rgba(255,255,255,0.8);line-height:2;">
+          La demanda existe y está verificada.<br>
+          El público está bien definido.<br>
+          El mercado no tiene techo.<br>
+          El mensaje diferencia.<br>
+          El momento es ahora — el turismo latinoamericano a Europa está en su pico histórico.<br>
+          Conozco el terreno porque lo viví.<br>
+          Y nadie lo está contando como yo.
+        </p>
+        <p style="font-family:'Caveat',cursive;font-size:20px;color:var(--miel);margin-top:1rem;line-height:1.8;">Soy buena en esto. Y me apasiona.<br>Ya no hay más excusas.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── POSICIONAMIENTO ── -->
+<section class="pos-section" id="posicionamiento">
+  <div class="container">
+    <span class="eyebrow">Estrategia de marca</span>
+    <h2 class="section-title">Posicionamiento<br><span>y cliente ideal.</span></h2>
+
+    <div class="valores-wrap reveal">
+      <p class="valores-label">Los 5 valores de marca</p>
+      <div class="valores-cards">
+        <div class="valor-card">
+          <p class="valor-name">Determinación</p>
+          <p class="valor-desc">No esperé las condiciones perfectas. Empecé con lo que tenía — y eso es exactamente lo que le muestro a mi audiencia que es posible.</p>
+        </div>
+        <div class="valor-card">
+          <p class="valor-name">Honestidad</p>
+          <p class="valor-desc">Los precios reales, los errores cometidos, los baños de pago. Sin filtros ni romanticismos. Es lo que me diferencia de cualquier otra cuenta de viajes.</p>
+        </div>
+        <div class="valor-card">
+          <p class="valor-name">Empoderamiento</p>
+          <p class="valor-desc">Cada pieza de contenido existe para demostrar con el ejemplo que cualquier mujer puede viajar sola. No con palabras de aliento — con información concreta.</p>
+        </div>
+        <div class="valor-card">
+          <p class="valor-name">Autonomía</p>
+          <p class="valor-desc">Me muevo por mis propios medios y tomo mis propias decisiones. No necesito que nadie me complete para ir a donde quiero ir — y eso no es heroísmo, es una elección.</p>
+        </div>
+        <div class="valor-card">
+          <p class="valor-name">Comunidad</p>
+          <p class="valor-desc">No construyo audiencia. Construyo un grupo de mujeres que se reconocen entre sí — que comparten el mismo deseo, los mismos miedos, y la misma decisión de superarlos.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="pos-grid reveal">
+      <div class="pos-card">
+        <p class="pos-label">Cliente real</p>
+        <p class="pos-title">La mujer que quiere pero no arranca</p>
+        <p class="pos-body">Mujer latinoamericana, 25-38 años. Tiene trabajo e ingresos propios. Quiere viajar a Europa pero lleva meses diciéndose que todavía no es el momento. Que le falta dinero, compañía o tiempo.</p>
+      </div>
+      <div class="pos-card">
+        <p class="pos-label">Cliente ideal</p>
+        <p class="pos-title">La que ya dio el primer paso</p>
+        <p class="pos-body">Ya viajó sola una vez, o ya decidió que lo va a hacer. Ahora quiere hacerlo mejor, más seguido, con más destinos. Busca un sistema, no un tip suelto.</p>
+      </div>
+    </div>
+
+    <div class="analisis-wrap reveal">
+      <p class="valores-label" style="margin-top:2.5rem;">Mi avatar</p>
+
+      <!-- DOLORES Y DESEOS -->
+      <div class="dd-grid" style="margin-bottom:2rem;">
+        <div class="dd-card dd-dolores">
+          <p class="dd-titulo">😔 Sus dolores</p>
+          <p class="dd-item">No sabe cuánto cuesta de verdad viajar a Europa — los números que encuentra no se parecen a su realidad.</p>
+          <p class="dd-item">Quiere viajar pero no tiene con quién ir, y asume que eso la frena.</p>
+          <p class="dd-item">Le da bronca el contenido aspiracional que no le sirve: presupuestos en dólares, guías en inglés, cuentas que no hablan de lo que a ella le preocupa.</p>
+          <p class="dd-item">Siente que el miedo de que algo salga mal la paraliza más que la falta de dinero.</p>
+          <p class="dd-item">Se siente sola con este deseo — como si fuera rara por quererlo.</p>
+        </div>
+        <div class="dd-card dd-deseos">
+          <p class="dd-titulo">✨ Sus deseos</p>
+          <p class="dd-item">Hacer su primer viaje sola a Europa antes de que pase otro año.</p>
+          <p class="dd-item">Saber cuánto le va a costar de verdad — un número real que le diga "con esto alcanza".</p>
+          <p class="dd-item">Sentirse capaz de moverse sola por una ciudad desconocida y resolverlo todo.</p>
+          <p class="dd-item">Demostrar — principalmente a sí misma — que puede hacerlo con lo que tiene.</p>
+          <p class="dd-item">Vivir la experiencia real del destino, no la versión turística y filtrada que venden todos.</p>
+        </div>
+      </div>
+
+      <div class="avatar-grid">
+        <div class="avatar-profile">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3E9Gyn97FDY1N1B6OiklEsxEHce/hf_20260618_204714_19f04253-9d1e-487c-94e6-7585e15a9b71.png" alt="Valentina — avatar cliente ideal HeyNinaP" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:cover;max-height:280px;">
+          <div style="background:var(--noche);border-radius:0 0 12px 12px;padding:0.875rem 1rem;">
+            <p style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:var(--blanco);margin-bottom:1px;">Valentina</p>
+            <p style="font-size:12px;color:var(--indigo);margin-bottom:8px;">28 años · Buenos Aires · Relación de dependencia</p>
+            <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;">
+              <span style="font-size:10px;padding:2px 8px;background:#1a1a2e;color:var(--indigo);border-radius:8px;border:1px solid #2a2a4e;">quiere viajar</span>
+              <span style="font-size:10px;padding:2px 8px;background:#1a1a2e;color:var(--indigo);border-radius:8px;border:1px solid #2a2a4e;">nunca fue sola</span>
+              <span style="font-size:10px;padding:2px 8px;background:#1a1a2e;color:var(--indigo);border-radius:8px;border:1px solid #2a2a4e;">ingresos propios</span>
+            </div>
+            <p style="font-family:'Caveat',cursive;font-size:14px;color:var(--miel);">"¿Cuándo voy a tener suficiente plata para este viaje?"</p>
+          </div>
+        </div>
+        <div class="avatar-pillars">
+          <div class="pilar-card"><p class="pilar-num">02 · Obstáculos</p><p class="pilar-text">No sabe cuánto cuesta de verdad viajar a Europa. No tiene con quién ir y asume que eso significa que no puede. Lleva meses posponiendo.</p></div>
+          <div class="pilar-card"><p class="pilar-num">05 · Objetivos</p><p class="pilar-text">Hacer su primer viaje sola a Europa antes de que pase otro año. Demostrar — principalmente a sí misma — que puede hacerlo con lo que tiene.</p></div>
+          <div class="pilar-card"><p class="pilar-num">06 · Miedos</p><p class="pilar-text">Que algo salga mal y no tener a nadie al lado para resolverlo. Que el dinero no alcance a mitad del viaje.</p></div>
+          <div class="pilar-card"><p class="pilar-num">09 · En qué piensa</p><p class="pilar-text">"¿Cuándo voy a tener suficiente plata?" "¿Y si me pasa algo?" "¿Tengo que esperar a que alguien pueda acompañarme?"</p></div>
+          <div class="pilar-card"><p class="pilar-num">10 · Creencias</p><p class="pilar-text">Que viajar sola es para mujeres con más valentía, más dinero o más experiencia. Que Europa es cara.</p></div>
+          <div class="pilar-card"><p class="pilar-num">11 · Identidad</p><p class="pilar-text">No se ve a sí misma como viajera. Todavía no hizo el click de "eso también puede ser yo".</p></div>
+          <div class="pilar-card"><p class="pilar-num">13 · Resentimientos</p><p class="pilar-text">Le da bronca el contenido de viajes que no habla de su realidad. Siente que la información útil en español no existe o está hecha para otra gente.</p></div>
+          <div class="pilar-card"><p class="pilar-num">17 · Plataformas</p><p class="pilar-text">Instagram y TikTok pasiva. YouTube para investigar. Guarda posts "para cuando esté lista".</p></div>
+          <div class="pilar-card"><p class="pilar-num">20 · Compras pasadas</p><p class="pilar-text">Siguió cuentas aspiracionales cuyos presupuestos no se parecen a los suyos. Guías en inglés o desactualizadas.</p></div>
+          <div class="pilar-card"><p class="pilar-num">25 · Vida social</p><p class="pilar-text">Sus amigas no pueden o no quieren. Se siente sola con este deseo — como si fuera rara por quererlo.</p></div>
+          <div class="pilar-card" style="border-top-color:var(--miel);"><p class="pilar-num" style="color:var(--miel);">28 · Finanzas</p><p class="pilar-text">Puede ahorrar si sabe cuánto necesita. Nunca vio un número real que le diga "con esto alcanza".</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── PLATAFORMAS ── -->
+<section class="plat-section" id="plataformas">
+  <div class="container">
+    <span class="eyebrow">Dónde encontrarme</span>
+    <h2 class="section-title">Las plataformas.</h2>
+    <div class="plat-grid reveal">
+      <a href="https://www.youtube.com/@HeyNinaP" target="_blank" rel="noopener" class="plat-card">
+        <div class="plat-icon" style="background:#FEECEC;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
+        <p class="plat-name">YouTube</p>
+        <p class="plat-handle">@HeyNinaP</p>
+      </a>
+      <a href="https://www.instagram.com/hey.ninap/" target="_blank" rel="noopener" class="plat-card">
+        <div class="plat-icon" style="background:#FCE8F3;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C2185B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </div>
+        <p class="plat-name">Instagram</p>
+        <p class="plat-handle">@hey.ninap</p>
+      </a>
+      <a href="https://www.tiktok.com/@hey.ninap" target="_blank" rel="noopener" class="plat-card">
+        <div class="plat-icon" style="background:#E8F0FF;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5E7FCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </div>
+        <p class="plat-name">TikTok</p>
+        <p class="plat-handle">@hey.ninap</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── IDENTIDAD ── -->
+<section class="id-section" id="identidad">
+  <div class="container">
+    <span class="eyebrow">Brand guide</span>
+    <h2 class="section-title">La identidad<br><span>de la marca.</span></h2>
+    <div class="id-grid reveal">
+      <div>
+        <p class="id-sub">Logo — variantes</p>
+        <div class="logo-variants">
+          <div class="logo-var" style="background:var(--noche);">
+            <svg viewBox="0 0 1048 1091" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#5e7fcc" d="M555.05,260.67c-15.54,22.66-29.82,44.85-42.83,68.65-43.27,79.16-67.91,166.33-71.38,256.55v53.27c1.79,49.63,9.55,97.69,20.61,146,5.87,25.64,10.01,58.69-15.5,69.74-31.46,13.62-63.15-.46-89.11-20.8-62-48.58-123.35-148.37-166.12-216.74l-41.99-67.11c-24.52-39.19-48.14-77.89-70.69-118.18l-20.56-32.5c-10.69-16.9-17.36-35.06,0-46.19,9.97-6.39,21.62-7.81,33.49-8.53,23.88-1.43,45.3,6.7,63.65,21.51,14.92,12.04,28.28,24.62,40.33,39.75,15.44,19.37,28.74,39.24,41.27,60.69l40.6,69.46,41.72,69.13,10.09,14.16c1.32-6.34-.55-10.89-.51-16.73.4-53.09,6.46-105.62,18.14-157.6,12.88-57.32,33.74-111.69,61.65-163.2,19.81-36.56,41.7-71.08,67.2-103.78,13.51-17.33,27.47-32.71,43.02-48.06,13.32-13.16,27.36-23.84,44.95-31.25,38.31-16.14,81.38-18.54,121.11-6.16,29.66,9.24,51.76,31.43,61.29,60.65,15.83,48.54,3.19,110.56-11.36,159.92l24.56-13.69,51.38-36.62c41.43-29.53,89.9-67.52,135.95-86.91,20.4-8.59,46.46-13.53,53.35,8.63,1.67,5.37,2.47,11.17,0,16.64-5.85,12.96-13.14,24.79-22.33,35.62l-23.05,27.14c-30.52,32.86-63.73,61.95-98.63,90.16l-39.86,32.21c-16.18,13.08-32.57,24.81-50.58,35.27-36.25,21.05-74.92,32.49-115.83,20.23-10.41-3.12-18.39-9.1-23.45-18.78-17.86-34.15-3.79-94.8,6.11-133.46,5.82-22.74,11.86-44.51,15.24-67.68,1.26-8.61,1.6-17.01-1.13-24.81-1.83-5.23-6.56-7.55-11.92-7.12-34.87,2.83-59.61,42.39-78.89,70.5Z"/>
+              <path fill="#d4a84b" d="M195.96,807.78c-22.14,11.23-61.5-.15-81.71-16.86-16.78-13.88-23.66-36.05-15.6-56.14,3.52-8.79,10.01-14.97,18.79-18.32,24.94-9.53,52.62-2.24,70.03,18.2,19.14,22.48,28.47,63,8.49,73.13Z"/>
+            </svg>
+            <span class="logo-var-label">sobre oscuro</span>
+          </div>
+          <div class="logo-var" style="background:var(--niebla);">
+            <svg viewBox="0 0 1048 1091" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#0d0d0d" d="M555.05,260.67c-15.54,22.66-29.82,44.85-42.83,68.65-43.27,79.16-67.91,166.33-71.38,256.55v53.27c1.79,49.63,9.55,97.69,20.61,146,5.87,25.64,10.01,58.69-15.5,69.74-31.46,13.62-63.15-.46-89.11-20.8-62-48.58-123.35-148.37-166.12-216.74l-41.99-67.11c-24.52-39.19-48.14-77.89-70.69-118.18l-20.56-32.5c-10.69-16.9-17.36-35.06,0-46.19,9.97-6.39,21.62-7.81,33.49-8.53,23.88-1.43,45.3,6.7,63.65,21.51,14.92,12.04,28.28,24.62,40.33,39.75,15.44,19.37,28.74,39.24,41.27,60.69l40.6,69.46,41.72,69.13,10.09,14.16c1.32-6.34-.55-10.89-.51-16.73.4-53.09,6.46-105.62,18.14-157.6,12.88-57.32,33.74-111.69,61.65-163.2,19.81-36.56,41.7-71.08,67.2-103.78,13.51-17.33,27.47-32.71,43.02-48.06,13.32-13.16,27.36-23.84,44.95-31.25,38.31-16.14,81.38-18.54,121.11-6.16,29.66,9.24,51.76,31.43,61.29,60.65,15.83,48.54,3.19,110.56-11.36,159.92l24.56-13.69,51.38-36.62c41.43-29.53,89.9-67.52,135.95-86.91,20.4-8.59,46.46-13.53,53.35,8.63,1.67,5.37,2.47,11.17,0,16.64-5.85,12.96-13.14,24.79-22.33,35.62l-23.05,27.14c-30.52,32.86-63.73,61.95-98.63,90.16l-39.86,32.21c-16.18,13.08-32.57,24.81-50.58,35.27-36.25,21.05-74.92,32.49-115.83,20.23-10.41-3.12-18.39-9.1-23.45-18.78-17.86-34.15-3.79-94.8,6.11-133.46,5.82-22.74,11.86-44.51,15.24-67.68,1.26-8.61,1.6-17.01-1.13-24.81-1.83-5.23-6.56-7.55-11.92-7.12-34.87,2.83-59.61,42.39-78.89,70.5Z"/>
+              <path fill="#0d0d0d" d="M195.96,807.78c-22.14,11.23-61.5-.15-81.71-16.86-16.78-13.88-23.66-36.05-15.6-56.14,3.52-8.79,10.01-14.97,18.79-18.32,24.94-9.53,52.62-2.24,70.03,18.2,19.14,22.48,28.47,63,8.49,73.13Z"/>
+            </svg>
+            <span class="logo-var-label">sobre claro</span>
+          </div>
+          <div class="logo-var" style="background:var(--indigo);">
+            <svg viewBox="0 0 1048 1091" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#ebf0ff" d="M555.05,260.67c-15.54,22.66-29.82,44.85-42.83,68.65-43.27,79.16-67.91,166.33-71.38,256.55v53.27c1.79,49.63,9.55,97.69,20.61,146,5.87,25.64,10.01,58.69-15.5,69.74-31.46,13.62-63.15-.46-89.11-20.8-62-48.58-123.35-148.37-166.12-216.74l-41.99-67.11c-24.52-39.19-48.14-77.89-70.69-118.18l-20.56-32.5c-10.69-16.9-17.36-35.06,0-46.19,9.97-6.39,21.62-7.81,33.49-8.53,23.88-1.43,45.3,6.7,63.65,21.51,14.92,12.04,28.28,24.62,40.33,39.75,15.44,19.37,28.74,39.24,41.27,60.69l40.6,69.46,41.72,69.13,10.09,14.16c1.32-6.34-.55-10.89-.51-16.73.4-53.09,6.46-105.62,18.14-157.6,12.88-57.32,33.74-111.69,61.65-163.2,19.81-36.56,41.7-71.08,67.2-103.78,13.51-17.33,27.47-32.71,43.02-48.06,13.32-13.16,27.36-23.84,44.95-31.25,38.31-16.14,81.38-18.54,121.11-6.16,29.66,9.24,51.76,31.43,61.29,60.65,15.83,48.54,3.19,110.56-11.36,159.92l24.56-13.69,51.38-36.62c41.43-29.53,89.9-67.52,135.95-86.91,20.4-8.59,46.46-13.53,53.35,8.63,1.67,5.37,2.47,11.17,0,16.64-5.85,12.96-13.14,24.79-22.33,35.62l-23.05,27.14c-30.52,32.86-63.73,61.95-98.63,90.16l-39.86,32.21c-16.18,13.08-32.57,24.81-50.58,35.27-36.25,21.05-74.92,32.49-115.83,20.23-10.41-3.12-18.39-9.1-23.45-18.78-17.86-34.15-3.79-94.8,6.11-133.46,5.82-22.74,11.86-44.51,15.24-67.68,1.26-8.61,1.6-17.01-1.13-24.81-1.83-5.23-6.56-7.55-11.92-7.12-34.87,2.83-59.61,42.39-78.89,70.5Z"/>
+              <path fill="#ebf0ff" d="M195.96,807.78c-22.14,11.23-61.5-.15-81.71-16.86-16.78-13.88-23.66-36.05-15.6-56.14,3.52-8.79,10.01-14.97,18.79-18.32,24.94-9.53,52.62-2.24,70.03,18.2,19.14,22.48,28.47,63,8.49,73.13Z"/>
+            </svg>
+            <span class="logo-var-label" style="color:rgba(255,255,255,0.4);">sobre índigo</span>
+          </div>
+          <div class="logo-var" style="background:var(--blanco);border:1px solid #eee;">
+            <svg viewBox="0 0 1048 1091" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#5e7fcc" d="M555.05,260.67c-15.54,22.66-29.82,44.85-42.83,68.65-43.27,79.16-67.91,166.33-71.38,256.55v53.27c1.79,49.63,9.55,97.69,20.61,146,5.87,25.64,10.01,58.69-15.5,69.74-31.46,13.62-63.15-.46-89.11-20.8-62-48.58-123.35-148.37-166.12-216.74l-41.99-67.11c-24.52-39.19-48.14-77.89-70.69-118.18l-20.56-32.5c-10.69-16.9-17.36-35.06,0-46.19,9.97-6.39,21.62-7.81,33.49-8.53,23.88-1.43,45.3,6.7,63.65,21.51,14.92,12.04,28.28,24.62,40.33,39.75,15.44,19.37,28.74,39.24,41.27,60.69l40.6,69.46,41.72,69.13,10.09,14.16c1.32-6.34-.55-10.89-.51-16.73.4-53.09,6.46-105.62,18.14-157.6,12.88-57.32,33.74-111.69,61.65-163.2,19.81-36.56,41.7-71.08,67.2-103.78,13.51-17.33,27.47-32.71,43.02-48.06,13.32-13.16,27.36-23.84,44.95-31.25,38.31-16.14,81.38-18.54,121.11-6.16,29.66,9.24,51.76,31.43,61.29,60.65,15.83,48.54,3.19,110.56-11.36,159.92l24.56-13.69,51.38-36.62c41.43-29.53,89.9-67.52,135.95-86.91,20.4-8.59,46.46-13.53,53.35,8.63,1.67,5.37,2.47,11.17,0,16.64-5.85,12.96-13.14,24.79-22.33,35.62l-23.05,27.14c-30.52,32.86-63.73,61.95-98.63,90.16l-39.86,32.21c-16.18,13.08-32.57,24.81-50.58,35.27-36.25,21.05-74.92,32.49-115.83,20.23-10.41-3.12-18.39-9.1-23.45-18.78-17.86-34.15-3.79-94.8,6.11-133.46,5.82-22.74,11.86-44.51,15.24-67.68,1.26-8.61,1.6-17.01-1.13-24.81-1.83-5.23-6.56-7.55-11.92-7.12-34.87,2.83-59.61,42.39-78.89,70.5Z"/>
+              <path fill="#d4a84b" d="M195.96,807.78c-22.14,11.23-61.5-.15-81.71-16.86-16.78-13.88-23.66-36.05-15.6-56.14,3.52-8.79,10.01-14.97,18.79-18.32,24.94-9.53,52.62-2.24,70.03,18.2,19.14,22.48,28.47,63,8.49,73.13Z"/>
+            </svg>
+            <span class="logo-var-label">principal</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="id-sub">Paleta de color</p>
+        <div class="colores-row">
+          <div class="color-sw"><div class="color-dot" style="background:#5E7FCC"></div><p class="color-name">Índigo</p><p class="color-hex">#5E7FCC</p></div>
+          <div class="color-sw"><div class="color-dot" style="background:#0D0D0D"></div><p class="color-name">Noche</p><p class="color-hex">#0D0D0D</p></div>
+          <div class="color-sw"><div class="color-dot" style="background:#D4A84B"></div><p class="color-name">Miel</p><p class="color-hex">#D4A84B</p></div>
+          <div class="color-sw"><div class="color-dot" style="background:#8A8A8A"></div><p class="color-name">Piedra</p><p class="color-hex">#8A8A8A</p></div>
+          <div class="color-sw"><div class="color-dot" style="background:#EBF0FF;border:1px solid #dce8ff"></div><p class="color-name">Niebla</p><p class="color-hex">#EBF0FF</p></div>
+        </div>
+
+        <p class="id-sub">Tipografía</p>
+        <div class="tipo-row">
+          <p class="tipo-label">Display</p>
+          <p style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;letter-spacing:-0.03em;">Space Grotesk</p>
+        </div>
+        <div class="tipo-row">
+          <p class="tipo-label">Body</p>
+          <p style="font-family:'Inter',sans-serif;font-size:15px;">Inter — cuerpo de texto</p>
+        </div>
+        <div class="tipo-row">
+          <p class="tipo-label">A mano</p>
+          <p style="font-family:'Caveat',cursive;font-size:20px;color:var(--indigo);">Caveat — la voz de Nina</p>
+        </div>
+
+        <p class="id-sub">Tono de comunicación</p>
+        <div class="tono-row">
+          <span class="tono-pill">Auténtico</span>
+          <span class="tono-pill">Empático</span>
+          <span class="tono-pill">Atrevido</span>
+        </div>
+        <p style="font-family:'Caveat',cursive;font-size:17px;color:var(--indigo);margin-top:0.75rem;">sin filtros, sin romanticismos →</p>
+      </div>
+    </div>
+
+    <!-- VOZ DE MARCA -->
+    <div class="voz-grid reveal">
+
+      <div class="voz-bloque">
+        <p class="voz-titulo">Frases de marca</p>
+        <p class="voz-item">"sin filtros" — define cómo hablo. Siempre.</p>
+        <p class="voz-item voz-tagline">"Para que la única razón por la que no viajes sea que todavía no compraste el pasaje."</p>
+      </div>
+
+      <div class="voz-bloque">
+        <p class="voz-titulo">Voz según el contexto</p>
+        <p class="voz-item"><strong>Videos / posts:</strong> directo al hook. Sin saludo, sin intro.</p>
+        <p class="voz-item"><strong>Historias:</strong> "Hola, hola" · "Buenas, buenas" · "Muy, pero muy buenos días"</p>
+        <p class="voz-item"><strong>Cierre:</strong> siempre con pregunta o CTA según el contenido.</p>
+      </div>
+
+      <div class="voz-bloque">
+        <p class="voz-titulo">Muletillas naturales</p>
+        <p class="voz-item">O sea · re · igual · dale · obvio · literalmente</p>
+        <p class="voz-item" style="font-size:12px;color:var(--piedra);">Voz rioplatense, sin forzarla.</p>
+        <p class="voz-titulo" style="margin-top:1rem;">Risa escrita</p>
+        <p class="voz-item">jajaja / jajaj</p>
+      </div>
+
+      <div class="voz-bloque">
+        <p class="voz-titulo">Emojis recurrentes</p>
+        <p class="voz-item" style="font-size:22px;letter-spacing:4px;">🌍 ✈️ 📍 🗓️ ✨</p>
+        <p class="voz-titulo" style="margin-top:1rem;">Hashtags — mezcla estratégica</p>
+        <p class="voz-item" style="font-size:12px;line-height:1.8;">
+          <span class="hash-tag">Nicho:</span> #viajesolaymeencanta #mochilerasola<br>
+          <span class="hash-tag">Destino:</span> #budapest #varsovia #europa<br>
+          <span class="hash-tag">Propios:</span> #HeyNinaP #presupuestoreal
+        </p>
+      </div>
+
+      <div class="voz-bloque voz-preguntas">
+        <p class="voz-titulo">Las preguntas que definen la cuenta</p>
+        <p class="voz-pregunta">¿Cuánto gastaste de verdad?</p>
+        <p class="voz-pregunta">¿Vale la pena o es una trampa turística?</p>
+        <p class="voz-pregunta">¿Es seguro para ir sola?</p>
+        <p class="voz-pregunta">¿Cómo me organizo si voy sola?</p>
+        <p style="font-size:12px;color:var(--piedra);margin-top:0.75rem;">Cada pieza de contenido responde una o más de estas.</p>
+      </div>
+
+      <div class="voz-bloque voz-no">
+        <p class="voz-titulo" style="color:#e05a5a;">NO negociables</p>
+        <p class="voz-no-item">Nunca exagerar costos ni romantizar dificultades.</p>
+        <p class="voz-no-item">Nunca publicar algo que no viví o verifiqué.</p>
+        <p class="voz-no-item">Nunca hablar de marcas o productos que no usaría.</p>
+        <p class="voz-no-item">Nunca hacer contenido solo por el algoritmo sin valor real.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── TRAMPAS ── -->
+<section class="trampas-section" id="trampas">
+  <div class="container">
+    <span class="eyebrow">Lo que aprendí</span>
+    <h2 class="section-title">Las 5 trampas<br><span>que no voy a caer.</span></h2>
+    <p class="section-body">Son las trampas más comunes al empezar un proyecto de contenido. Las reconocí antes de empezar — y tomé una decisión sobre cada una.</p>
+    <div class="trampas-grid reveal">
+
+      <div class="trampa-card">
+        <span class="trampa-num">01</span>
+        <p class="trampa-titulo">Improvisar sin dirección</p>
+        <p class="trampa-texto">Voy a tener una estrategia de contenido clara desde el día uno. La evalúo cada 3-4 meses — no antes. Las estrategias necesitan tiempo para mostrar resultados.</p>
+      </div>
+
+      <div class="trampa-card">
+        <span class="trampa-num">02</span>
+        <p class="trampa-titulo">Cambiar de estrategia constantemente</p>
+        <p class="trampa-texto">Cuando algo no funcione a la semana, no lo voy a cambiar. Doy un mínimo de 3-4 meses antes de evaluar. La constancia va a ser mi estrategia.</p>
+      </div>
+
+      <div class="trampa-card">
+        <span class="trampa-num">03</span>
+        <p class="trampa-titulo">Subir lo que yo quiero, no lo que necesita mi audiencia</p>
+        <p class="trampa-texto">Cada pieza de contenido parte de los dolores de Valentina — no de mis ganas. Ella quiere saber cuánto cuesta de verdad, si es seguro viajar sola, cómo organizarse. Eso es lo que publico.</p>
+      </div>
+
+      <div class="trampa-card">
+        <span class="trampa-num">04</span>
+        <p class="trampa-titulo">Vender antes de conectar</p>
+        <p class="trampa-texto">Primero confianza, después venta. Voy a construir valor, mostrarme real y vulnerable, y generar comunidad antes de pedirle algo a mi audiencia.</p>
+      </div>
+
+      <div class="trampa-card">
+        <span class="trampa-num">05</span>
+        <p class="trampa-titulo">Esperar el momento perfecto</p>
+        <p class="trampa-texto">No voy a esperar tener más seguidores, más claridad ni más contenido acumulado. Ya empecé. El momento perfecto no existe — existe la decisión. Y ya la tomé.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── PILARES ── -->
+<section class="pilares-section" id="pilares">
+  <div class="container">
+    <span class="eyebrow">Estrategia de contenido</span>
+    <h2 class="section-title">Los 5 pilares<br><span>de contenido.</span></h2>
+    <p class="section-body">Todo lo que publico entra en uno de estos cinco pilares. No es azar — es la estructura que hace que una audiencia te siga, te confíe, y eventualmente te compre.</p>
+
+    <div class="pilares-grid reveal">
+
+      <div class="pilar-item">
+        <div class="pilar-icon">01</div>
+        <p class="pilar-nombre">Referente</p>
+        <p class="pilar-desc">Postura clara y controversial que genera identificación o debate. Hago que mi audiencia piense "esta dice lo que yo siempre pensé".</p>
+        <div class="pilar-ejemplos">
+          <p class="pe-ej">"Viajar sola no es valiente. Es una decisión. Y cualquiera puede tomarla."</p>
+          <p class="pe-ej">"El problema no es que no tenés plata. Es que nadie te enseñó a hacerlo con la que tenés."</p>
+          <p class="pe-ej">"Praga ya no es barata. Y las guías en español siguen mintiendo sobre eso."</p>
+        </div>
+      </div>
+
+      <div class="pilar-item">
+        <div class="pilar-icon">02</div>
+        <p class="pilar-nombre">Empatía</p>
+        <p class="pilar-desc">Humanizar la marca. Mostrar el proceso real, los momentos difíciles, los errores. 45-60 segundos máximo. Es el pilar más importante para conectar.</p>
+        <div class="pilar-ejemplos">
+          <p class="pe-ej">El día que llegué a una ciudad nueva sola y no sabía qué hacer.</p>
+          <p class="pe-ej">El momento en que algo salió mal y cómo lo resolví.</p>
+          <p class="pe-ej">El cansancio real de viajar en modo mochilera — lo que no muestran los videos estéticos.</p>
+        </div>
+      </div>
+
+      <div class="pilar-item">
+        <div class="pilar-icon">03</div>
+        <p class="pilar-nombre">Inicio</p>
+        <p class="pilar-desc">La razón de ser de la marca. De dónde vengo, por qué empecé. La historia que explica todo lo demás.</p>
+        <div class="pilar-ejemplos">
+          <p class="pe-ej">El video de presentación: el quiebre, la decisión, la historia que quiero contar.</p>
+          <p class="pe-ej">"Por qué empecé a hacer esto" — contarlo con más profundidad una vez que la cuenta esté establecida.</p>
+        </div>
+      </div>
+
+      <div class="pilar-item">
+        <div class="pilar-icon">04</div>
+        <p class="pilar-nombre">Nivel</p>
+        <p class="pilar-desc">Logros, resultados, progreso. Lo que construye autoridad y demuestra que sé de lo que hablo.</p>
+        <div class="pilar-ejemplos">
+          <p class="pe-ej">El contador de capitales — cada nueva capital visitada es un hito.</p>
+          <p class="pe-ej">Primeras marcas que me contacten, primeras guías vendidas.</p>
+          <p class="pe-ej">Testimonios de mujeres que viajaron usando mi información.</p>
+        </div>
+      </div>
+
+      <div class="pilar-item">
+        <div class="pilar-icon">05</div>
+        <p class="pilar-nombre">Aporte</p>
+        <p class="pilar-desc">Valor puro. El contenido que mi audiencia guarda, comparte y vuelve a ver. El más importante para generar confianza antes de vender.</p>
+        <div class="pilar-ejemplos">
+          <p class="pe-ej">Guías completas con precios reales: Budapest, Roma, Varsovia, Praga.</p>
+          <p class="pe-ej">Cómo encontrar vuelos baratos, cómo armar el presupuesto, cómo elegir hostel.</p>
+          <p class="pe-ej">Joyas ocultas, trucos de locales, cosas que nadie dice en las guías en español.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MÉTODO DE PUBLICACIÓN -->
+    <div class="metodo-pub reveal">
+      <p class="pe-titulo">Método de publicación — el orden de los primeros posts</p>
+      <div class="metodo-grid">
+        <div class="metodo-paso">
+          <span class="metodo-num">1°</span>
+          <p class="metodo-pilar">Referente o Aporte</p>
+          <p class="metodo-desc">"Budapest vs París: €400 de diferencia." Empezás con un dato que rompe una creencia y posiciona tu ángulo desde el primer día.</p>
+        </div>
+        <div class="metodo-sep">→</div>
+        <div class="metodo-paso">
+          <span class="metodo-num">2°</span>
+          <p class="metodo-pilar">Empatía e Inicio</p>
+          <p class="metodo-desc">El video de presentación en el día 5. Tu historia, el quiebre, por qué hacés esto. Conectás emocionalmente con la audiencia que ya llegó por el valor del primer video.</p>
+        </div>
+        <div class="metodo-sep">→</div>
+        <div class="metodo-paso">
+          <span class="metodo-num">3°</span>
+          <p class="metodo-pilar">Nivel y Aporte</p>
+          <p class="metodo-desc">"Lo que nadie te dice antes de ir a Budapest." Demostración de conocimiento real, con los datos que solo alguien que estuvo ahí puede dar.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESTRUCTURA DE CADA PIEZA -->
+    <div class="pilares-estructura reveal">
+      <p class="pe-titulo">Estructura de cada pieza</p>
+      <div class="pe-grid">
+        <div class="pe-paso">
+          <span class="pe-num">1 · Gancho</span>
+          <p class="pe-nombre">Los primeros 3 segundos</p>
+          <p class="pe-desc">Problema doloroso, creencia rota, o promesa de solución.</p>
+          <div class="pe-ejemplos">
+            <p class="pe-ej-dark">"Creías que Budapest era cara. Estabas equivocada."</p>
+            <p class="pe-ej-dark">"Todo lo que te dijeron sobre viajar sola en Europa está mal."</p>
+            <p class="pe-ej-dark">"¿Vale la pena Praga en 2026? Quédate que te lo cuento."</p>
+          </div>
+        </div>
+        <div class="pe-flecha">→</div>
+        <div class="pe-paso">
+          <span class="pe-num">2 · Desarrollo</span>
+          <p class="pe-nombre">El valor real</p>
+          <p class="pe-desc">Cumplís la promesa del gancho con información concreta y verificada. Sin relleno.</p>
+        </div>
+        <div class="pe-flecha">→</div>
+        <div class="pe-paso">
+          <span class="pe-num">3 · CTA</span>
+          <p class="pe-nombre">Siempre uno, siempre específico</p>
+          <p class="pe-desc">Decirle a la audiencia exactamente qué hacer.</p>
+          <div class="pe-ejemplos">
+            <p class="pe-ej-dark">"Guardá este video para cuando planifiques."</p>
+            <p class="pe-ej-dark">"¿Alguna vez tuviste miedo de viajar sola? Contame en los comentarios."</p>
+            <p class="pe-ej-dark">"Etiquetá a esa amiga que siempre dice que quiere viajar pero no arranca."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── VENEDE ── -->
+<section class="venede-section" id="venede">
+  <div class="container">
+    <span class="eyebrow">Cuando llegue el momento</span>
+    <h2 class="section-title">Cómo cerrar la venta<br><span>cuando llegue el momento.</span></h2>
+    <p class="section-body">Vender es conversar, no perseguir. Cada paso tiene un propósito.</p>
+
+    <div class="venede-grid reveal">
+
+      <div class="venede-card">
+        <span class="venede-letra">V</span>
+        <p class="venede-nombre">Validar</p>
+        <p class="venede-desc">Hacer sentir bien a la persona por haber dado el paso de escribirme.</p>
+        <p class="venede-ej">"Qué bueno que me escribís, significa que ya estás pensando en hacer ese viaje."</p>
+      </div>
+
+      <div class="venede-card">
+        <span class="venede-letra">E</span>
+        <p class="venede-nombre">Explorar</p>
+        <p class="venede-desc">Conocer exactamente qué busca antes de ofrecer nada.</p>
+        <p class="venede-ej">"¿A qué destino querés ir? ¿Viajás sola por primera vez? ¿Qué es lo que más te frena ahora mismo?"</p>
+      </div>
+
+      <div class="venede-card">
+        <span class="venede-letra">N</span>
+        <p class="venede-nombre">Nutrir</p>
+        <p class="venede-desc">Devolver valor en base a lo que me dijo. Mostrar que entiendo su problema y que soy la persona indicada.</p>
+        <p class="venede-ej">Si le frena el presupuesto → explico cómo funciona mi método. Si le frena el miedo → comparto algo de mi historia.</p>
+      </div>
+
+      <div class="venede-card">
+        <span class="venede-letra">E</span>
+        <p class="venede-nombre">Estimular</p>
+        <p class="venede-desc">Presentar mi opción cuando ya demostré que entiendo su problema.</p>
+        <p class="venede-ej">"Tengo una guía completa de Budapest con todos los precios actualizados, el mapa de los baños, y el itinerario día a día. Es exactamente lo que te va a sacar esa duda."</p>
+      </div>
+
+      <div class="venede-card">
+        <span class="venede-letra">D</span>
+        <p class="venede-nombre">Decidir</p>
+        <p class="venede-desc">Envío los presupuestos y el link de pago. Sin presión, con opciones claras.</p>
+        <p class="venede-ej">"¿Preferís la guía de Budapest sola o el pack de las 4 capitales? ¿Por dónde te queda mejor pagar?"</p>
+      </div>
+
+      <div class="venede-card">
+        <span class="venede-letra">E</span>
+        <p class="venede-nombre">Elevar</p>
+        <p class="venede-desc">Una vez que compró, volver a validarla. Que se sienta bien con la decisión, no con dolor de bolsillo.</p>
+        <p class="venede-ej">"Tomaste la mejor decisión. Con esto llegás a Budapest sabiendo exactamente qué hacer con cada euro."</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <p class="cta-mano">y entonces...</p>
+    <h2 class="cta-title">La única razón por la que no viajes es que <span>todavía no compraste el pasaje.</span></h2>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <a href="contenido.html" class="footer-logo" title="" style="cursor:default;opacity:1;">
+    <svg viewBox="0 0 1048 1091" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#ebf0ff" d="M555.05,260.67c-15.54,22.66-29.82,44.85-42.83,68.65-43.27,79.16-67.91,166.33-71.38,256.55v53.27c1.79,49.63,9.55,97.69,20.61,146,5.87,25.64,10.01,58.69-15.5,69.74-31.46,13.62-63.15-.46-89.11-20.8-62-48.58-123.35-148.37-166.12-216.74l-41.99-67.11c-24.52-39.19-48.14-77.89-70.69-118.18l-20.56-32.5c-10.69-16.9-17.36-35.06,0-46.19,9.97-6.39,21.62-7.81,33.49-8.53,23.88-1.43,45.3,6.7,63.65,21.51,14.92,12.04,28.28,24.62,40.33,39.75,15.44,19.37,28.74,39.24,41.27,60.69l40.6,69.46,41.72,69.13,10.09,14.16c1.32-6.34-.55-10.89-.51-16.73.4-53.09,6.46-105.62,18.14-157.6,12.88-57.32,33.74-111.69,61.65-163.2,19.81-36.56,41.7-71.08,67.2-103.78,13.51-17.33,27.47-32.71,43.02-48.06,13.32-13.16,27.36-23.84,44.95-31.25,38.31-16.14,81.38-18.54,121.11-6.16,29.66,9.24,51.76,31.43,61.29,60.65,15.83,48.54,3.19,110.56-11.36,159.92l24.56-13.69,51.38-36.62c41.43-29.53,89.9-67.52,135.95-86.91,20.4-8.59,46.46-13.53,53.35,8.63,1.67,5.37,2.47,11.17,0,16.64-5.85,12.96-13.14,24.79-22.33,35.62l-23.05,27.14c-30.52,32.86-63.73,61.95-98.63,90.16l-39.86,32.21c-16.18,13.08-32.57,24.81-50.58,35.27-36.25,21.05-74.92,32.49-115.83,20.23-10.41-3.12-18.39-9.1-23.45-18.78-17.86-34.15-3.79-94.8,6.11-133.46,5.82-22.74,11.86-44.51,15.24-67.68,1.26-8.61,1.6-17.01-1.13-24.81-1.83-5.23-6.56-7.55-11.92-7.12-34.87,2.83-59.61,42.39-78.89,70.5Z"/>
+      <path fill="#ebf0ff" d="M195.96,807.78c-22.14,11.23-61.5-.15-81.71-16.86-16.78-13.88-23.66-36.05-15.6-56.14,3.52-8.79,10.01-14.97,18.79-18.32,24.94-9.53,52.62-2.24,70.03,18.2,19.14,22.48,28.47,63,8.49,73.13Z"/>
+    </svg>
+  </a>
+  <div class="footer-right">
+    <span class="footer-copy">Viajes con presupuesto real · 2026</span>
+  </div>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+reveals.forEach(r => obs.observe(r));
+</script>
+</body>
+</html>

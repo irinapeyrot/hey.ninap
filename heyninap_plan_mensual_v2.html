@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan de Contenido Mensual v2 — HeyNinaP</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#0e0e0e; --bg2:#161616; --bg3:#1e1e1e;
+  --border:#2a2a2a; --gold:#c8a84b; --gold-light:#e8c875;
+  --text:#e8e4dc; --muted:#888; --subtle:#555;
+  --teal:#4a9e8a; --coral:#d4644a; --purple:#8b6bbf; --blue:#4a7ec8;
+}
+body { font-family:'Georgia',serif; background:var(--bg); color:var(--text); line-height:1.7; }
+.page { max-width:980px; margin:0 auto; padding:3rem 2rem; }
+.header { border-bottom:1px solid var(--border); padding-bottom:2rem; margin-bottom:2.5rem; }
+.brand { font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:0.75rem; font-family:sans-serif; }
+h1 { font-size:34px; font-weight:normal; letter-spacing:-0.02em; margin-bottom:0.5rem; }
+.v2 { display:inline-block; font-size:10px; font-family:sans-serif; padding:2px 8px; border:1px solid var(--gold); border-radius:20px; color:var(--gold); margin-left:10px; vertical-align:middle; }
+.header-meta { font-size:13px; color:var(--muted); font-family:sans-serif; margin-top:0.5rem; }
+
+.position-strip { background:var(--bg2); border:1px solid var(--gold); border-radius:10px; padding:1rem 1.5rem; margin-bottom:2.5rem; }
+.pl { font-size:10px; color:var(--gold); font-family:sans-serif; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:6px; }
+.pt { font-size:15px; color:var(--text); font-style:italic; }
+.ps { font-size:12px; color:var(--muted); font-family:sans-serif; margin-top:6px; }
+
+.nav { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:2.5rem; }
+.nb { font-size:11px; font-family:sans-serif; padding:6px 14px; border-radius:20px; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; transition:all 0.2s; letter-spacing:0.05em; text-transform:uppercase; }
+.nb:hover { border-color:var(--gold); color:var(--gold); }
+.nb.active { background:var(--gold); color:var(--bg); border-color:var(--gold); }
+
+.panel { display:none; }
+.panel.active { display:block; }
+
+.st { font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:1.25rem; font-family:sans-serif; border-bottom:1px solid var(--border); padding-bottom:8px; }
+.sb { margin-bottom:2.5rem; }
+.note { font-size:12px; color:var(--subtle); font-style:italic; margin:0.5rem 0 1rem; font-family:sans-serif; }
+
+.stats { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:2rem; }
+.stat { background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:1rem; }
+.sn { font-size:22px; color:var(--gold); margin-bottom:2px; font-family:sans-serif; font-weight:300; }
+.sl { font-size:11px; color:var(--muted); font-family:sans-serif; }
+
+.wgrid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:2rem; }
+.wbox { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:1rem; }
+.wn { font-size:10px; font-family:sans-serif; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:6px; }
+.wd { font-size:15px; margin-bottom:4px; }
+.wa { font-size:11px; color:var(--muted); font-family:sans-serif; }
+
+.hbox { background:var(--bg2); border:1px solid var(--border); border-left:3px solid var(--gold); border-radius:10px; padding:1rem 1.25rem; margin-bottom:10px; }
+.ht { font-size:13px; font-family:sans-serif; margin-bottom:4px; }
+.hd { font-size:12px; color:var(--muted); line-height:1.6; }
+
+.sc { background:var(--bg2); border:1px solid var(--border); border-radius:12px; margin-bottom:14px; overflow:hidden; }
+.sh { padding:1.25rem 1.5rem; border-bottom:1px solid var(--border); cursor:pointer; display:flex; justify-content:space-between; align-items:flex-start; }
+.shl { flex:1; }
+.snum { font-size:10px; color:var(--gold); font-family:sans-serif; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:4px; }
+.stitle { font-size:15px; font-family:sans-serif; font-weight:500; margin-bottom:8px; }
+.smeta { display:flex; gap:6px; flex-wrap:wrap; }
+.stag { font-size:10px; padding:2px 8px; border-radius:20px; border:1px solid var(--border); color:var(--muted); font-family:sans-serif; }
+.sbody { padding:1.5rem; display:none; }
+.sbody.open { display:block; }
+.arr { font-size:12px; color:var(--muted); transition:transform 0.2s; flex-shrink:0; margin-left:12px; margin-top:4px; }
+.arr.open { transform:rotate(90deg); }
+
+.scene { margin-bottom:1.25rem; }
+.sct { font-size:10px; font-family:sans-serif; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:4px; }
+.sctxt { font-size:13px; color:var(--text); line-height:1.8; background:var(--bg3); border-radius:8px; padding:0.875rem 1rem; border-left:2px solid var(--gold); }
+.scn { font-size:11px; color:var(--subtle); margin-top:4px; font-family:sans-serif; font-style:italic; }
+
+.pgrid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:1.5rem; }
+.pbox { background:var(--bg3); border-radius:8px; padding:0.875rem 1rem; }
+.pcat { font-size:10px; color:var(--muted); font-family:sans-serif; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; }
+.pi { display:flex; justify-content:space-between; font-size:12px; padding:3px 0; border-bottom:1px solid var(--border); }
+.pi:last-child { border-bottom:none; }
+.pn { color:var(--muted); }
+.pv { color:var(--gold-light); font-family:sans-serif; }
+
+.tbox { background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:0.875rem 1rem; margin:1.25rem 0; }
+.tt { font-size:10px; color:var(--teal); font-family:sans-serif; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px; }
+.tl { padding-left:16px; }
+.tl li { font-size:12px; color:var(--muted); line-height:1.9; }
+.tl li strong { color:var(--text); }
+
+.cgrid { display:grid; gap:0; }
+.crow { display:grid; grid-template-columns:80px 1fr 1fr 1fr; gap:10px; padding:10px 0; border-bottom:1px solid var(--border); align-items:start; }
+.crow:last-child { border-bottom:none; }
+.cday { font-size:12px; font-family:sans-serif; color:var(--muted); }
+.ct { font-size:10px; padding:2px 7px; border-radius:4px; display:inline-block; margin-bottom:3px; font-family:sans-serif; }
+.cv { background:rgba(74,158,138,0.15); color:var(--teal); }
+.cvr { background:rgba(212,100,74,0.15); color:var(--coral); }
+.cp { background:rgba(139,107,191,0.15); color:var(--purple); }
+.ce { background:rgba(200,168,75,0.15); color:var(--gold); }
+.ch { font-size:12px; color:var(--text); line-height:1.5; }
+.cd { font-size:11px; color:var(--subtle); margin-top:2px; font-family:sans-serif; }
+
+.cross3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-bottom:1.5rem; }
+.cc { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:1rem; }
+.cp2 { font-size:10px; font-family:sans-serif; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:10px; }
+.cl { padding-left:14px; }
+.cl li { font-size:12px; color:var(--muted); line-height:1.9; }
+
+.srow7 { display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-bottom:1.5rem; }
+.sd { background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:0.6rem; text-align:center; }
+.sdn { font-size:10px; color:var(--gold); font-family:sans-serif; text-transform:uppercase; margin-bottom:4px; }
+.sdc { font-size:11px; color:var(--muted); line-height:1.4; }
+
+.flow { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-bottom:1rem; }
+.fb { padding:6px 12px; background:var(--bg2); border:1px solid var(--border); border-radius:8px; font-size:12px; font-family:sans-serif; }
+.fe { background:rgba(74,158,138,0.1); border-color:var(--teal); color:var(--teal); font-weight:500; }
+.fa { color:var(--subtle); font-size:12px; }
+
+.hs { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:1.25rem; margin-bottom:12px; }
+.hst { font-size:10px; font-family:sans-serif; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:1rem; }
+.hr2 { display:grid; grid-template-columns:130px 1fr; gap:12px; padding:8px 0; border-bottom:1px solid var(--border); align-items:start; }
+.hr2:last-child { border-bottom:none; }
+.htype { font-size:11px; font-family:sans-serif; color:var(--gold); }
+.htxt { font-size:13px; color:var(--text); font-style:italic; }
+.hnote { font-size:11px; color:var(--subtle); margin-top:2px; font-family:sans-serif; }
+
+.usbadge { display:inline-block; font-size:10px; font-family:sans-serif; padding:2px 8px; border-radius:4px; background:rgba(74,126,200,0.15); color:var(--blue); margin-left:6px; vertical-align:middle; }
+
+@media(max-width:700px){
+  .stats{grid-template-columns:repeat(2,1fr);}
+  .wgrid{grid-template-columns:repeat(2,1fr);}
+  .crow{grid-template-columns:70px 1fr;}
+  .crow>:nth-child(3),.crow>:nth-child(4){display:none;}
+  .cross3{grid-template-columns:1fr;}
+  .pgrid{grid-template-columns:1fr;}
+  .srow7{grid-template-columns:repeat(4,1fr);}
+  .hr2{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <p class="brand">HeyNinaP — Estrategia Digital</p>
+  <h1>Plan de Contenido — Mes 1 <span class="v2">v2</span></h1>
+  <p class="header-meta">Budapest · Roma · Varsovia · Praga · Señal EEUU &nbsp;|&nbsp; Posicionamiento sin bandera regional · Junio 2026</p>
+</div>
+
+<div class="position-strip">
+  <p class="pl">Posicionamiento central — no cambia con el destino</p>
+  <p class="pt">"Viajo sola. Con presupuesto real. Y te cuento exactamente qué cuesta, qué vale la pena, y qué no."</p>
+  <p class="ps">Europa, Estados Unidos, y lo que venga. Soy Nina, soy uruguaya. El método es siempre el mismo.</p>
+</div>
+
+<div class="nav">
+  <button class="nb active" onclick="show('overview',this)">Visión general</button>
+  <button class="nb" onclick="show('pres',this)">Presentación</button>
+  <button class="nb" onclick="show('bud',this)">S1 — Budapest</button>
+  <button class="nb" onclick="show('rom',this)">S2 — Roma</button>
+  <button class="nb" onclick="show('var',this)">S3 — Varsovia</button>
+  <button class="nb" onclick="show('pra',this)">S4 — Praga</button>
+  <button class="nb" onclick="show('cross',this)">Cross-platform</button>
+  <button class="nb" onclick="show('hooks',this)">Banco de hooks</button>
+</div>
+
+<!-- OVERVIEW -->
+<div id="p-overview" class="panel active">
+  <div class="stats">
+    <div class="stat"><p class="sn">4</p><p class="sl">Destinos del mes</p></div>
+    <div class="stat"><p class="sn">20+</p><p class="sl">Piezas de contenido</p></div>
+    <div class="stat"><p class="sn">Día 5</p><p class="sl">Video presentación (no día 1)</p></div>
+    <div class="stat"><p class="sn">S3</p><p class="sl">Señal EEUU — Story poll</p></div>
+  </div>
+
+  <div class="sb">
+    <p class="st">Qué cambió en v2</p>
+    <div class="hbox"><p class="ht">Posicionamiento sin bandera regional</p><p class="hd">La cuenta no es "de Europa". Es de un método — viajar sola, con presupuesto real, a donde sea. Europa es el punto de entrada, no el límite. Escala a EEUU, Asia o cualquier destino sin reposicionarse.</p></div>
+    <div class="hbox"><p class="ht">Ángulo "un día vs más tiempo" — formato propio</p><p class="hd">No como hilo conductor de todo, sino como formato disponible cuando el material lo permite. Genera el doble de contenido por destino y es único en el nicho en español.</p></div>
+    <div class="hbox"><p class="ht">Señal EEUU en semana 3</p><p class="hd">Story poll en Varsovia: "Después de Europa, ¿por cuál ciudad de EEUU empezamos?". Activa expectativa, genera engagement, y muestra que el scope es global desde el mes 1.</p></div>
+    <div class="hbox"><p class="ht">Video presentación en día 5 — no en día 1</p><p class="hd">Primero el valor, después la persona. Para el día 5 ya tenés seguidores que llegaron por Budapest y quieren saber quién sos. La presentación tiene audiencia receptiva.</p></div>
+    <div class="hbox"><p class="ht">Uruguay como diferenciador explícito</p><p class="hd">Mencionarlo en la presentación es importante. Diferencia del pelotón argentino en el nicho. El acento rioplatense conecta con toda Latinoamérica sin que te confundan con nadie más.</p></div>
+  </div>
+
+  <div class="sb">
+    <p class="st">Estructura del mes</p>
+    <div class="wgrid">
+      <div class="wbox" style="border-top:3px solid var(--gold)"><p class="wn" style="color:var(--gold)">Semana 1</p><p class="wd">Budapest</p><p class="wa">Destino subestimado · Presentación día 5</p></div>
+      <div class="wbox" style="border-top:3px solid var(--coral)"><p class="wn" style="color:var(--coral)">Semana 2</p><p class="wd">Roma</p><p class="wa">Alcance masivo · Honestidad de precios 2026</p></div>
+      <div class="wbox" style="border-top:3px solid var(--teal)"><p class="wn" style="color:var(--teal)">Semana 3</p><p class="wd">Varsovia</p><p class="wa">La sorpresa · Story poll EEUU <span class="usbadge">EEUU</span></p></div>
+      <div class="wbox" style="border-top:3px solid var(--purple)"><p class="wn" style="color:var(--purple)">Semana 4</p><p class="wd">Praga</p><p class="wa">Cierre honesto · ¿Sigue siendo barata?</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRESENTACIÓN -->
+<div id="p-pres" class="panel">
+  <div class="sb">
+    <p class="st">Video de presentación — día 5 (no día 1)</p>
+    <p class="note">Se publica después de los 4 primeros videos de Budapest. Para ese momento ya tenés seguidores que llegaron por valor concreto y quieren saber quién sos.</p>
+
+    <div class="sc">
+      <div class="sh" onclick="tog(this)">
+        <div class="shl">
+          <p class="snum">Video presentación — día 5</p>
+          <p class="stitle">"Quién soy y de qué va esta cuenta"</p>
+          <div class="smeta"><span class="stag">TikTok + Reel</span><span class="stag">55 segundos</span><span class="stag">Personal / Credibilidad</span><span class="stag">Sin bandera regional</span></div>
+        </div>
+        <span class="arr">▶</span>
+      </div>
+      <div class="sbody">
+        <div class="scene">
+          <p class="sct">0 — 3 seg · Hook visual</p>
+          <div class="sctxt">[Collage rápido: Parlamento de Budapest, Coliseo de Roma, skyline de Varsovia, calle en Praga. Texto en pantalla: "Más de la mitad de las capitales europeas. Muchas en un solo día."]</div>
+          <p class="scn">No empezar con cara a cámara estática. El collage muestra credencial visual inmediata.</p>
+        </div>
+        <div class="scene">
+          <p class="sct">3 — 18 seg · Quién sos</p>
+          <div class="sctxt">"Soy Nina, soy uruguaya, y viajo sola. Llevo años recorriendo capitales europeas y partes de Estados Unidos en modo mochilera — con presupuesto real, sin lujos que no valen la pena, y sin perderme nada que sí vale."</div>
+          <p class="scn">Mencionar Uruguay sin explayarse. Es un diferenciador inmediato en el nicho.</p>
+        </div>
+        <div class="scene">
+          <p class="sct">18 — 42 seg · El ángulo único</p>
+          <div class="sctxt">"Me especialicé en algo que pocas personas hacen: entender qué podés ver de una ciudad en un día, y qué necesitás si tenés más tiempo. Porque no todos tenemos vacaciones largas — a veces tenés 24 horas en Berlín y necesitás saber exactamente qué hacer con ellas. En esta cuenta vas a encontrar eso: cuánto cuesta de verdad, qué vale la pena y qué es trampa turística, dónde comen los locales, y — sí — dónde están los baños gratis."</div>
+          <p class="scn">El detalle de los baños humaniza y genera comentarios. La audiencia que ya vio tus videos lo reconoce como tu sello.</p>
+        </div>
+        <div class="scene">
+          <p class="sct">42 — 55 seg · La promesa abierta</p>
+          <div class="sctxt">"Europa primero, porque es donde más estuve. Pero no me quedo ahí. Estados Unidos viene, y después lo que venga. Siempre con el mismo criterio: presupuesto real, sin filtros."</div>
+          <p class="scn">Scope geográfico abierto desde el día 5. La audiencia te sigue sabiendo que la cuenta escala.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-top:1rem;">
+      <p class="st" style="margin-bottom:1rem;">Checklist de la presentación</p>
+      <ul class="tl">
+        <li><strong>Nombrá Uruguay</strong> — no lo expliques. Solo mencionarlo es suficiente diferenciador.</li>
+        <li><strong>Nombrar destinos específicos</strong> — Budapest, Roma, Varsovia, Praga, Lisboa, Viena, Berlín, Londres, Ámsterdam. Los nombres dan credibilidad concreta, no "más de la mitad".</li>
+        <li><strong>El ángulo "un día vs más tiempo"</strong> — tu propuesta de valor única. Nombrala explícitamente.</li>
+        <li><strong>No hablar de follower goals ni "comenzando este camino"</strong> — resta credibilidad. Hablá como quien ya sabe lo que hace.</li>
+        <li><strong>Dejá EEUU como promesa</strong> — no como contenido actual. "Viene" activa expectativa.</li>
+        <li><strong>El detalle de los baños</strong> — el guiño que te humaniza y diferencia de cualquier otra cuenta de viajes.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- BUDAPEST -->
+<div id="p-bud" class="panel">
+  <div class="sb">
+    <p class="st">Semana 1 — Budapest · Precios 2026</p>
+    <p class="note">⚠ Dato crítico: Gellért Baths cerrado desde octubre 2025 hasta 2028. No lo menciones como opción activa.</p>
+    <div class="pgrid">
+      <div class="pbox">
+        <p class="pcat">Alojamiento</p>
+        <div class="pi"><span class="pn">Hostel dorm (Barrio VII)</span><span class="pv">€20-25/noche</span></div>
+        <div class="pi"><span class="pn">Hostel privado</span><span class="pv">€40-60/noche</span></div>
+        <div class="pi"><span class="pn">Hotel 3★ central</span><span class="pv">€60-90/noche</span></div>
+      </div>
+      <div class="pbox">
+        <p class="pcat">Comida</p>
+        <div class="pi"><span class="pn">Desayuno supermercado</span><span class="pv">€2-3</span></div>
+        <div class="pi"><span class="pn">Menú kifőzde</span><span class="pv">€5-7</span></div>
+        <div class="pi"><span class="pn">Cena restaurante local</span><span class="pv">€8-12</span></div>
+        <div class="pi"><span class="pn">Cerveza local</span><span class="pv">€1.50-2.50</span></div>
+      </div>
+      <div class="pbox">
+        <p class="pcat">Transporte</p>
+        <div class="pi"><span class="pn">Ticket individual (app BudapestGO)</span><span class="pv">€1.40</span></div>
+        <div class="pi"><span class="pn">Pase 24 horas</span><span class="pv">€7.50</span></div>
+        <div class="pi"><span class="pn">Pase 72 horas</span><span class="pv">€14</span></div>
+      </div>
+      <div class="pbox">
+        <p class="pcat">Actividades</p>
+        <div class="pi"><span class="pn">Széchenyi Baths</span><span class="pv">€25-30</span></div>
+        <div class="pi"><span class="pn">Rudas Baths (locales)</span><span class="pv">€15-20</span></div>
+        <div class="pi"><span class="pn">Parlamento (no-EU)</span><span class="pv">€35</span></div>
+        <div class="pi"><span class="pn">Parlamento (EU)</span><span class="pv">€18</span></div>
+        <div class="pi"><span class="pn">Fisherman's Bastion (noche)</span><span class="pv">GRATIS</span></div>
+      </div>
+    </div>
+    <div class="tbox">
+      <p class="tt">🚻 Baños en Budapest</p>
+      <ul class="tl">
+        <li><strong>Públicos de pago:</strong> 200-300 HUF (~€0.60). Mapa oficial: fcsm.hu/illemhelyterkep</li>
+        <li><strong>Gratis:</strong> McDonald's de Váci utca (sin control). WestEnd y Arena Mall.</li>
+        <li><strong>Barrio VII:</strong> Bares con sticker indicando si el baño es libre de usar.</li>
+        <li><strong>Parlamento:</strong> Visitor Center — gratuitos y bien mantenidos.</li>
+        <li><strong>App útil:</strong> BudapestGO. Google Maps: buscar "WC Budapest".</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sb">
+    <p class="st">Calendario — Semana 1 Budapest</p>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.25rem;">
+      <div class="cgrid">
+        <div class="crow">
+          <p class="cday">Lunes</p>
+          <div><span class="ct cvr">Viral</span><p class="ch">"Budapest vs París: mismo viaje, €400 de diferencia"</p><p class="cd">TikTok + Reel · Comparación</p></div>
+          <div><span class="ct ce">Stories</span><p class="ch">Poll: ¿Cuánto creés que cuesta Budapest?</p></div>
+          <div><span class="ct cv">YouTube</span><p class="ch">Guía completa Budapest presupuesto real 2026</p></div>
+        </div>
+        <div class="crow">
+          <p class="cday">Miércoles</p>
+          <div><span class="ct cv">Valor</span><p class="ch">"Dónde dormir en Budapest con menos de €25"</p><p class="cd">TikTok + Reel · Alto guardado</p></div>
+          <div><span class="ct cp">Stories</span><p class="ch">Behind the scenes Barrio VII al amanecer</p></div>
+          <div></div>
+        </div>
+        <div class="crow">
+          <p class="cday">Viernes — día 5</p>
+          <div><span class="ct cp">Presentación</span><p class="ch">"Quién soy y de qué va esta cuenta"</p><p class="cd">TikTok + Reel · Ver guión en panel Presentación</p></div>
+          <div><span class="ct cv">Stories</span><p class="ch">Quiz: ¿Dónde están los baños gratis en Budapest?</p></div>
+          <div></div>
+        </div>
+        <div class="crow">
+          <p class="cday">Sábado</p>
+          <div><span class="ct cv">Valor</span><p class="ch">"Lo que nadie te dice antes de ir a Budapest"</p><p class="cd">Cajeros, baños, Gellért cerrado, kifőzde</p></div>
+          <div><span class="ct cp">Stories</span><p class="ch">Respuestas a comentarios de la semana</p></div>
+          <div></div>
+        </div>
+        <div class="crow">
+          <p class="cday">Domingo</p>
+          <div><span class="ct ce">Estético</span><p class="ch">Photo dump Budapest — tonos dorados + audio trending</p><p class="cd">Instagram Reel · Sin voz</p></div>
+          <div><span class="ct ce">Stories</span><p class="ch">"La semana que viene: Roma. ¿Ya fuiste?"</p></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sb">
+    <p class="st">Guiones — Budapest</p>
+
+    <div class="sc">
+      <div class="sh" onclick="tog(this)">
+        <div class="shl"><p class="snum">Video 1 — Lunes</p><p class="stitle">"Budapest vs París: mismo viaje, €400 de diferencia"</p><div class="smeta"><span class="stag">TikTok + Reel</span><span class="stag">45 seg</span><span class="stag">Viral / Comparación</span></div></div>
+        <span class="arr">▶</span>
+      </div>
+      <div class="sbody">
+        <div class="scene"><p class="sct">0-3 seg · Hook</p><div class="sctxt">[Parlamento Budapest sobre el Danubio. Texto: "€400 de diferencia. Mismo viaje."]</div></div>
+        <div class="scene"><p class="sct">3-12 seg</p><div class="sctxt">"Hice el mismo viaje de 5 días dos veces. Una en París, una en Budapest. La diferencia fue de más de cuatrocientos euros. Y Budapest era mejor."</div></div>
+        <div class="scene"><p class="sct">12-38 seg · Desglose</p><div class="sctxt">"En París el hostel salía €55 por noche. En Budapest, en el Barrio Judío, €22. Cena en París: €25 sin vino. En Budapest: menú húngaro completo, €8. Tour del Parlamento: €18 con documento europeo. El Louvre: €22 y dos horas de cola. Los baños termales — que son una de las experiencias más increíbles de Europa — desde €15. Nada comparable existe en París a ese precio. Total de 5 días en Budapest: €280. En París: €690."</div><p class="scn">Mostrar imágenes de cada cosa. Números en pantalla.</p></div>
+        <div class="scene"><p class="sct">38-45 seg · CTA</p><div class="sctxt">"¿Con ese presupuesto, cuál elegirías? Comentá abajo. Guía completa en mi YouTube — link en bio."</div></div>
+      </div>
+    </div>
+
+    <div class="sc">
+      <div class="sh" onclick="tog(this)">
+        <div class="shl"><p class="snum">Video 2 — Miércoles</p><p class="stitle">"Dónde dormir en Budapest con menos de €25"</p><div class="smeta"><span class="stag">TikTok + Reel</span><span class="stag">60 seg</span><span class="stag">Valor / Alto guardado</span></div></div>
+        <span class="arr">▶</span>
+      </div>
+      <div class="sbody">
+        <div class="scene"><p class="sct">0-3 seg</p><div class="sctxt">[Hostel limpio y estético. Texto: "€22/noche. Budapest. Y era así."]</div></div>
+        <div class="scene"><p class="sct">3-55 seg</p><div class="sctxt">"Budapest tiene algo que casi ninguna capital europea tiene: hosteles buenos, bien ubicados y en precio de 2015. Barrio VII, el Barrio Judío — el más recomendado. Los mejores hosteles están acá, a pasos de los ruin bars y el mercado. Precio: €20-25 en dorm. Si querés privacidad sin gastar de más, Barrio VIII es más local y más barato. Una cosa que me costó aprender: los cajeros Euronet que están en cada esquina turística te cobran comisión encubierta. Siempre usá cajeros de bancos como OTP o Erste, y elegí 'sin conversión de moneda' cuando te pregunten."</div></div>
+        <div class="scene"><p class="sct">55-60 seg · CTA</p><div class="sctxt">"Guardá esto. En la próxima semana subo dónde comer como local por menos de €7."</div></div>
+      </div>
+    </div>
+
+    <div class="sc">
+      <div class="sh" onclick="tog(this)">
+        <div class="shl"><p class="snum">Video 3 — Sábado</p><p class="stitle">"Lo que nadie te dice antes de ir a Budapest"</p><div class="smeta"><span class="stag">TikTok + Reel</span><span class="stag">55 seg</span><span class="stag">Personal / Insider</span></div></div>
+        <span class="arr">▶</span>
+      </div>
+      <div class="sbody">
+        <div class="scene"><p class="sct">0-3 seg</p><div class="sctxt">[Cara a cámara. Texto: "Nadie te dice esto antes de ir a Budapest."]</div></div>
+        <div class="scene"><p class="sct">3-55 seg · Tips reales</p><div class="sctxt">"Primero — los baños. Budapest tiene fama de no tener muchos y los que hay cuestan 50 centavos. El truco: los bares del Barrio VII tienen un sticker en la puerta que dice si el baño es libre de usar. Mirá eso antes de entrar. Segundo — el Gellért está cerrado. Cerró en octubre de 2025 y no abre hasta 2028. Si lo tenías en el plan, cambialo por las Rudas — más auténticas y más baratas. Tercero — los kifőzde. Cantinas húngaras que sirven menú de dos platos por €5-6. El Frici Papa en la Király utca es el mejor. Llegá antes de las 12:30 porque se llena de locales. Cuarto — cajeros Euronet: siempre evitalos."</div></div>
+      </div>
+    </div>
+
+    <div class="sc">
+      <div class="sh" onclick="tog(this)">
+        <div class="shl"><p class="snum">Video 4 — Formato propio (opcional)</p><p class="stitle">"¿Cuánto tiempo necesitás en Budapest de verdad?"</p><div class="smeta"><span class="stag">TikTok + Reel</span><span class="stag">55 seg</span><span class="stag">Un día vs más tiempo</span></div></div>
+        <span class="arr">▶</span>
+      </div>
+      <div class="sbody">
+        <div class="scene"><p class="sct">0-3 seg</p><div class="sctxt">[Texto: "Hice Budapest en un día. Después volví 3 más. La diferencia:"]</div></div>
+        <div class="scene"><p class="sct">3-55 seg</p><div class="sctxt">"Si solo tenés un día en Budapest, el plan es: mañana en el Gran Mercado y el Castillo, tarde cruzando el Puente de las Cadenas, noche en los ruin bars del Barrio VII. Eso es Budapest en un día — y vale la pena. Pero si tenés tres o cuatro días, aparece la otra Budapest: las termas en modo relajado sin apuro, el barrio de Óbuda donde viven los húngaros de verdad, la Isla Margarita de tarde, el Hospital en la Roca. Un día te da la postal. Tres días te dan la ciudad. Si podés elegir, elegí los tres."</div><p class="scn">Usarlo cuando tengas material de ambas instancias del viaje.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROMA -->
+<div id="p-rom" class="panel">
+  <div class="sb">
+    <p class="st">Semana 2 — Roma · Precios 2026</p>
+    <p class="note">Roma se encareció con el Año Jubilar 2025. En 2026 los precios siguen altos en el centro. La estrategia: dormir y comer a 15 min del centro histórico.</p>
+    <div class="pgrid">
+      <div class="pbox">
+        <p class="pcat">Alojamiento</p>
+        <div class="pi"><span class="pn">Hostel dorm</span><span class="pv">€45-60/noche</span></div>
+        <div class="pi"><span class="pn">Testaccio / Pigneto</span><span class="pv">-30% vs centro</span></div>
+        <div class="pi"><span class="pn">Tasa turística obligatoria</span><span class="pv">€3-7/noche</span></div>
+      </div>
+      <div class="pbox">
+        <p class="pcat">Comida</p>
+        <div class="pi"><span class="pn">Espresso de pie en bar</span><span class="pv">€1-1.50</span></div>
+        <div class="pi"><span class="pn">Pizza al taglio (porción)</span><span class="pv">€2.50-4</span></div>
+        <div class="pi"><span class="pn">Trattoria local</span><span class="pv">€12-18</span></div>
+        <div class="pi"><span class="pn">⚠ Zona turística: misma pasta</span><span class="pv">€22+</span></div>
+      </div>
+      <div class="pbox">
+        <p class="pcat">Actividades</p>
+        <div class="pi"><span class="pn">Coliseo + Foro Romano</span><span class="pv">€16-22</span></div>
+        <div class="pi"><span class="pn">Vaticano + Capilla Sixtina</span><span class="pv">€20-25 online</span></div>
+        <div class="pi"><span class="pn">Panteón</span><span class="pv">€5</span></div>
+        <div class="pi"><span class="pn">Fontana di Trevi / Foros</span><span class="pv">GRATIS</span></div>
+        <div class="pi"><span class="pn">Museos Vaticanos gratis</span><span class="pv">Último domingo/mes</span></div>
+      </div>
+      <div class="pbox">
+        <p class="pcat">Transporte</p>
+        <div class="pi"><span class="pn">Ticket individual 100 min</span><span class="pv">€1.50</span></div>
+        <div class="pi"><span class="pn">Pase 48 horas</span><span class="pv">€7</span></div>
+        <div class="pi"><span class="pn">Taxi oficial aeropuerto</span><span class="pv">€50 fijo</span></div>
+      </div>
+    </div>
+    <div class="tbox">
+      <p class="tt">🚻 Baños en Roma</p>
+      <ul class="tl">
+        <li><strong>La realidad:</strong> Roma es la ciudad más difícil de Europa para baños gratis.</li>
+        <li><strong>El truco local:</strong> Pedís un café en cualquier bar (€1.50) — te habilita el baño. Es la norma.</li>
+        <li><strong>Gratis:</strong> Foro Romano (dentro), Galería Borghese, Mercato di Testaccio.</li>
+        <li><strong>Shoppings:</strong> La Rinascente — gratis y limpios.</li>
+        <li><strong>App:</strong> "Flush Toilet Finder" — la más usada en Roma.</li>
+      </ul>
+    </div>
+    <div class="sb" style="margin-top:1.5rem;">
+      <p class="st">Joyas ocultas — Roma</p>
+      <ul class="tl">
+        <li><strong>Testaccio:</strong> 100+ puestos locales, almuerzo por €6. Pirámide de Cestio (gratis). Cementerio no-católico con Keats. Trattorias sin inglés.</li>
+        <li><strong>Pigneto:</strong> El barrio joven sin turistas. Cervezas a €3, street art, vida real.</li>
+        <li><strong>Freni e Frizioni (Trastevere):</strong> Aperitivo buffet gratis con la copa (~€8). La forma local de casi cenar gratis.</li>
+        <li><strong>Truco del menú:</strong> Menú solo en italiano + pizarra = local. Plastificado en inglés = trampa turística.</li>
+        <li><strong>Supli Roma (Via San Francesco a Ripa 137):</strong> Croqueta de arroz favorita de los romanos. €2.50.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sb">
+    <p class="st">Guiones — Roma</p>
+    <div class="sc">
+      <div class="sh" onclick="tog(this)">
+        <div class="shl"><p class="snum">Video 1 — Roma</p><p class="stitle">"¿Cuánto cuesta de verdad una semana en Roma en 2026?"</p><div class="smeta"><span class="stag">TikTok + Reel</span><span class="stag">60 seg</span><span class="stag">Desglose / Máx. guardados</span></div></div>
+        <span class="arr">▶</span>
+      </div>
+      <div class="sbody">
+        <div class="scene"><p class="sct">0-3 seg</p><div class="sctxt">[Fontana di Trevi al amanecer sin gente. Texto: "Roma 2026. Lo que NADIE te dice que cuesta."]</div></div>
+        <div class="scene"><p class="sct">3-60 seg</p><div class="sctxt">"Roma se volvió cara. Voy a ser honesta, porque si venís esperando precios de hace cinco años, te vas a llevar una sorpresa. Hostel: entre €45 y €60 por noche. El doble que Budapest. Por eso la primera decisión en Roma tiene que ser dónde quedarse: en el centro histórico pagás el doble por todo. En Testaccio o Pigneto — a 15 minutos en colectivo — pagás la mitad y comés como romano. Comida: ahí podés salvar el presupuesto. Espresso de pie en cualquier bar: €1.50. Pizza al taglio: €3. Lo que no podés evitar gastar: el Vaticano — compralo online, €20-25. Si vas el último domingo del mes, entrás gratis. El Coliseo: €16-22. El Panteón: €5. Lo que es gratis y vale: Trastevere de noche, el Foro al amanecer, la Pirámide de Cestio en Testaccio. Mi total de 5 días en Roma con este sistema: €380. Guardá este video para cuando planifiques."</div></div>
+      </div>
+    </div>
+
+    <div class="sc">
+      <div class="sh" onclick="tog(this)">
+        <div class="shl"><p class="snum">Video 2 — Roma</p><p class="stitle">"El barrio de Roma donde comen los romanos"</p><div class="smeta"><span class="stag">TikTok + Reel</span><span class="stag">50 seg</span><span class="stag">Insider / Joyas ocultas</span></div></div>
+        <span class="arr">▶</span>
+      </div>
+      <div class="sbody">
+        <div class="scene"><p class="sct">0-50 seg</p><div class="sctxt">"Si vas a Roma y solo conocés Trastevere y el Foro Romano, te perdiste la mejor parte. El barrio que los tours nunca incluyen: Testaccio. Metro línea B, estación Piramide. A 15 minutos del Coliseo. Primero, el Mercato di Testaccio — 100 puestos con frutas, quesos y comida caliente. Almorzás por €6. Segundo, hay una pirámide. Sí, del año 18 AC. La Pirámide de Cestio. Gratis de ver, casi sin turistas, y al lado hay un cementerio donde está enterrado Keats. Surrealismo puro. Tercero, la comida. Las mejores trattorias tradicionales de Roma están en Testaccio. Un plato de pasta con vino: €15. La misma pasta a 300 metros de la Fontana di Trevi: €28. Testaccio es la Roma que existe detrás del escenario turístico."</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VARSOVIA -->
+<div id="p-var" class="panel">
+  <div class="sb">
+    <p class="st">Semana 3 — Varsovia · Precios 2026 + Señal EEUU</p>
+    <div class="pgrid">
+      <div class="pbox">
+        <p class="pcat">Alojamiento</p>
+        <div class="pi"><span class="pn">Hostel dorm centro</span><span class="pv">€7-15/noche</span></div>
+        <div class="pi"><span class="pn">Hostel privado</span><span class="pv">€40-50/noche</span></div>
+        <div class="pi"><span class="pn">Mejor zona: cerca Centralna</span><span class="pv">vs Old Town -40%</span></div>
+      </div>
+      <div class="pbox">
+        <p class="pcat">Comida</p>
+        <div class="pi"><span class="pn">Bar Mleczny (menú 2 platos)</span><span class="pv">€2.50-4</span></div>
+        <div class="pi"><span class="pn">Pierogi (ración)</span><span class="pv">€3-5</span></div>
+        <div class="pi"><span class="pn">Restaurante local</span><span class="pv">€8-12</span></div>
+        <div class="pi"><span class="pn">Cerveza artesanal (barrio Praga)</span><span class="pv">€2-3</span></div>
+      </div>
+      <div class="pbox">
+        <p class="pcat">Transporte</p>
+        <div class="pi"><span class="pn">Ticket 75 min zona 1</span><span class="pv">€1.20</span></div>
+        <div class="pi"><span class="pn">Pase 24 horas</span><span class="pv">€4</span></div>
+        <div class="pi"><span class="pn">Tren aeropuerto → centro</span><span class="pv">€1.20</span></div>
+      </div>
+      <div class="pbox">
+        <p class="pcat">Actividades</p>
+        <div class="pi"><span class="pn">Museo del Alzamiento</span><span class="pv">€5</span></div>
+        <div class="pi"><span class="pn">Museo POLIN</span><span class="pv">€8</span></div>
+        <div class="pi"><span class="pn">Łazienki Park</span><span class="pv">GRATIS</span></div>
+        <div class="pi"><span class="pn">Conciertos Chopin (mayo-sept)</span><span class="pv">GRATIS</span></div>
+        <div class="pi"><span class="pn">Neon Museum</span><span class="pv">€6</span></div>
+      </div>
+    </div>
+    <div class="tbox">
+      <p class="tt">🚻 Baños en Varsovia</p>
+      <ul class="tl">
+        <li><strong>De pago:</strong> ~€0.70 en lugares turísticos. Llevá monedas.</li>
+        <li><strong>Gratis:</strong> Shoppings Złote Tarasy y Arkadia — mejor opción.</li>
+        <li><strong>Milk Bars:</strong> Pedís un té (€0.50) y podés usar el baño sin problema.</li>
+        <li><strong>Łazienki Park:</strong> Baños gratuitos bien señalizados dentro del parque.</li>
+      </ul>
+    </div>
+
+    <div style="background:rgba(74,126,200,0.08);border:1px solid var(--blue);border-radius:10px;padding:1.25rem;margin-top:1.5rem;">
+      <p style="font-size:10px;color:var(--blue);font-family:sans-serif;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">🇺🇸 Señal EEUU — Story del jueves semana 3</p>
+      <p style="font-size:13px;color:var(--text);margin-bottom:8px;">"Después de Europa... viene Estados Unidos. ¿Por cuál ciudad empezamos?"</p>
+      <p style="font-size:12px;color:var(--muted);font-family:sans-serif;">Poll: Nueva York · Chicago · Nueva Orleans · Los Ángeles</p>
+      <p style="font-size:11px;color:var(--subtle);font-family:sans-serif;margin-top:6px;">Activa expectativa de EEUU, genera engagement real, y le muestra a la audiencia desde el mes 1 que la cuenta no se limita a Europa.</p>
+    </div>
+
+    <div class="sb" style="margin-top:1.5rem;">
+      <p class="st">Joyas ocultas — Varsovia</p>
+      <ul class="tl">
+        <li><strong>Bary mleczne (Milk Bars):</strong> Cantinas con subsidio estatal. Menú de 2 platos por €3-4. Bar Prasowy en Marszałkowska 10 — el más auténtico.</li>
+        <li><strong>Barrio Praga:</strong> La Varsovia antes de la reconstrucción. Edificios originales, murales, bares de artistas. Nocny Rynek y Warszawa Wschodnia son los spots del momento.</li>
+        <li><strong>Hala Gwardii:</strong> Mercado gastronómico cubierto. Street food y cervezas artesanales. Nada turístico.</li>
+        <li><strong>Conciertos de Chopin en Łazienki:</strong> Cada domingo mayo-septiembre. Gratis. Una de las experiencias más increíbles de Europa que casi nadie sabe que no cuesta nada.</li>
+        <li><strong>Neon Museum:</strong> Carteles de neón de la era comunista. €6. Único en Europa.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sb">
+    <p class="st">Guión principal — Varsovia</p>
+    <div class="sc">
+      <div class="sh" onclick="tog(this)">
+        <div class="shl"><p class="snum">Video 1 — Varsovia</p><p class="stitle">"La capital europea más barata que probablemente no tenés en tu lista"</p><div class="smeta"><span class="stag">TikTok + Reel</span><span class="stag">60 seg</span><span class="stag">Descubrimiento / Alto share</span></div></div>
+        <span class="arr">▶</span>
+      </div>
+      <div class="sbody">
+        <div class="scene"><p class="sct">0-3 seg</p><div class="sctxt">[Skyline moderno con rascacielos y edificios históricos en contraste. Texto: "Esta ciudad no está en tu lista. Debería."]</div></div>
+        <div class="scene"><p class="sct">3-60 seg</p><div class="sctxt">"Varsovia, Polonia. La capital que nadie menciona cuando hablan de Europa, y que tiene algunos de los números más increíbles del continente. Hostel: desde €7 por noche. Sí, €7. Transporte completo del día: €4. Almuerzo en un bar mleczny — las cantinas de la era comunista que siguen funcionando con subsidio del Estado — €3. Menú de dos platos, comida casera, y nadie habla inglés. Para mí eso siempre es buena señal. ¿Qué hacés acá? El Museo del Alzamiento de Varsovia es uno de los museos de guerra más impresionantes que vi en mi vida — cuesta €5. La Ciudad Antigua fue reconstruida ladrillo por ladrillo después de la Segunda Guerra — el 85% fue destruido — y hoy es Patrimonio UNESCO. El Parque Łazienki es gratuito y tiene conciertos de Chopin cada domingo en verano, también gratuitos. Y si cruzás el Vístula, llegás al barrio de Praga — no la ciudad, el barrio — que es la Varsovia que sobrevivió la guerra. Bares de artistas donde una cerveza sale €2. Varsovia es el secreto que los que viajan por Europa del Este guardan para sí mismos. Ya no."</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRAGA -->
+<div id="p-pra" class="panel">
+  <div class="sb">
+    <p class="st">Semana 4 — Praga · Precios 2026</p>
+    <p class="note">Praga se encareció 60% desde 2020. El ángulo de honestidad total es tu diferenciador aquí — nadie en español lo dice con datos concretos.</p>
+    <div class="pgrid">
+      <div class="pbox">
+        <p class="pcat">Alojamiento</p>
+        <div class="pi"><span class="pn">Hostel dorm (Žižkov / Vinohrady)</span><span class="pv">€17-22/noche</span></div>
+        <div class="pi"><span class="pn">Czech Inn (top hostel)</span><span class="pv">€17/noche</span></div>
+        <div class="pi"><span class="pn">Hotel 3★ centro</span><span class="pv">€60-90/noche</span></div>
+        <div class="pi"><span class="pn">Old Town: +40-50% sobre resto</span><span class="pv">—</span></div>
+      </div>
+      <div class="pbox">
+        <p class="pcat">Comida</p>
+        <div class="pi"><span class="pn">Menú del día (polední menu)</span><span class="pv">€8-9</span></div>
+        <div class="pi"><span class="pn">Cerveza Pilsner Urquell</span><span class="pv">€2.20-2.70</span></div>
+        <div class="pi"><span class="pn">Klobása callejera</span><span class="pv">€4.50</span></div>
+        <div class="pi"><span class="pn">⚠ Mismo plato cerca Charles Bridge</span><span class="pv">€22+</span></div>
+      </div>
+      <div class="pbox">
+        <p class="pcat">Actividades</p>
+        <div class="pi"><span class="pn">Castillo de Praga (circuito B)</span><span class="pv">€10</span></div>
+        <div class="pi"><span class="pn">Puente de Carlos</span><span class="pv">GRATIS</span></div>
+        <div class="pi"><span class="pn">Vyšehrad (alternativa sin cola)</span><span class="pv">GRATIS (cripta €4)</span></div>
+        <div class="pi"><span class="pn">Iglesias clásicas gratis</span><span class="pv">30 min antes apertura</span></div>
+      </div>
+      <div class="pbox">
+        <p class="pcat">Transporte</p>
+        <div class="pi"><span class="pn">Ticket 90 min</span><span class="pv">€1</span></div>
+        <div class="pi"><span class="pn">Pase 24 horas</span><span class="pv">€4.40</span></div>
+        <div class="pi"><span class="pn">Pase 72 horas</span><span class="pv">€12.70</span></div>
+        <div class="pi"><span class="pn">⚠ Baños públicos de pago</span><span class="pv">€0.50/uso</span></div>
+      </div>
+    </div>
+    <div class="tbox">
+      <p class="tt">🚻 Baños en Praga</p>
+      <ul class="tl">
+        <li><strong>La realidad:</strong> Praga cobra baños prácticamente en todos lados. Presupuestá €0.50 por uso.</li>
+        <li><strong>Gratis:</strong> Visitor Center del Parlamento — bien mantenidos según reviews 2025.</li>
+        <li><strong>Shoppings:</strong> Palladium y OC Kotva — gratis y limpios.</li>
+        <li><strong>Bares checos:</strong> Con una cerveza (€2.20) tenés acceso sin problema.</li>
+        <li><strong>Truco presupuesto:</strong> Incluí €3-5/día para baños — el costo real que nadie menciona.</li>
+      </ul>
+    </div>
+    <div class="sb" style="margin-top:1.5rem;">
+      <p class="st">Joyas ocultas — Praga</p>
+      <ul class="tl">
+        <li><strong>Vyšehrad:</strong> Fortaleza al sur, vistas al Vltava sin colas, gratis. Tumbas de Dvořák y Smetana.</li>
+        <li><strong>Žižkov:</strong> Bares baratos, street art, Torre de Telecomunicaciones con bebés en la fachada. Cerveza €1.80.</li>
+        <li><strong>Vinohrady:</strong> Barrio residencial art nouveau. Cafés locales, cero tours. 10 min del centro.</li>
+        <li><strong>Náplavka:</strong> Mercado de agricultores los fines de semana. Los praguenses desayunan ahí. Gratis, con vistas al Castillo.</li>
+        <li><strong>Truco del menú checo:</strong> "Jídelní lístek v češtině, prosím" — hasta 20% más barato que el menú en inglés del mismo restaurante.</li>
+        <li><strong>Charles Bridge a las 6:30 AM:</strong> Casi vacío, con niebla y faroles encendidos. A las 10 AM es intransitable.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sb">
+    <p class="st">Guión principal — Praga</p>
+    <div class="sc">
+      <div class="sh" onclick="tog(this)">
+        <div class="shl"><p class="snum">Video 1 — Praga</p><p class="stitle">"Praga en 2026: ¿sigue siendo barata o ya no vale la pena?"</p><div class="smeta"><span class="stag">TikTok + Reel</span><span class="stag">55 seg</span><span class="stag">Anti-expectativa / Alto debate</span></div></div>
+        <span class="arr">▶</span>
+      </div>
+      <div class="sbody">
+        <div class="scene"><p class="sct">0-3 seg</p><div class="sctxt">[Puente de Carlos al amanecer. Texto: "¿Praga sigue siendo barata? La respuesta honesta."]</div></div>
+        <div class="scene"><p class="sct">3-55 seg</p><div class="sctxt">"Praga ya no es la Praga barata de hace cinco años. Los restaurantes subieron un 60% en precios desde 2020. La cerveza que antes costaba €1 ahora cuesta €2.20. Y si te quedás en la Ciudad Vieja, pagás el doble que en Žižkov o Vinohrady, que están a 10 minutos en metro. Dicho esto, sigue siendo más barata que París, Londres o Ámsterdam. Cómo seguir viajando barato en Praga en 2026: el polední menu al mediodía — sopa, plato y cerveza por €8-9. Lo mismo en turístico vale €22. El truco del menú en checo — pedí el menú en checo y los precios son hasta 20% más bajos en el mismo restaurante. Y Vyšehrad en vez del Castillo — fortaleza histórica al sur, mejores vistas, sin colas, gratis. El Castillo: €10 y dos horas de fila. Los baños son de pago casi en todos lados — sumá €3-5 por día porque nadie te lo dice y es parte del costo real. Total de 5 días en Praga con este sistema: entre €300 y €350. Caro para Europa del Este, barato para Europa Occidental."</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CROSS-PLATFORM -->
+<div id="p-cross" class="panel">
+  <div class="sb">
+    <p class="st">Estrategia cross-platform</p>
+    <div class="cross3">
+      <div class="cc">
+        <p class="cp2">TikTok — motor de descubrimiento</p>
+        <ul class="cl">
+          <li>Publicar primero — testear 24-48hs</li>
+          <li>1-2 videos por día</li>
+          <li>Hook en el primer segundo</li>
+          <li>Texto en pantalla desde frame 0</li>
+          <li>Audio trending biblioteca TikTok (al 20% si hay voz)</li>
+          <li>Location tag por barrio específico</li>
+          <li>Responder comentarios primeras 2hs</li>
+        </ul>
+      </div>
+      <div class="cc">
+        <p class="cp2">Instagram — conversión a comunidad</p>
+        <ul class="cl">
+          <li>Mismo clip sin marca de agua</li>
+          <li>Audio trending de biblioteca Instagram (separado)</li>
+          <li>Caption más largo con hashtags</li>
+          <li>Carruseles: guías en 10 slides</li>
+          <li>Stories diarias: encuesta, Q&A, behind scenes</li>
+          <li>Highlights por destino</li>
+          <li>Link bio → Linktree → YouTube + afiliados</li>
+        </ul>
+      </div>
+      <div class="cc">
+        <p class="cp2">YouTube — archivo y monetización</p>
+        <ul class="cl">
+          <li>1 video largo por semana (10-20 min)</li>
+          <li>Título: número + destino + presupuesto</li>
+          <li>Miniatura: cara + número grande + ciudad</li>
+          <li>Capítulos en descripción para SEO</li>
+          <li>Links de afiliados en descripción</li>
+          <li>Shorts: clips reformateados del video largo</li>
+          <li>Playlist por destino</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sb">
+      <p class="st">Flujo de audio — la pregunta más importante</p>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.25rem;">
+        <p style="font-size:13px;color:var(--text);margin-bottom:1rem;">Grabás con la cámara nativa del teléfono. Editás en CapCut. Exportás <strong>sin música</strong>. Subís a cada plataforma y agregás el audio trending desde la biblioteca de cada una al 20-30% de volumen. Tu voz queda en la capa base — se escucha perfectamente.</p>
+        <div class="flow">
+          <div class="fb">Grabás (cámara nativa)</div><span class="fa">→</span>
+          <div class="fb">Editás en CapCut</div><span class="fa">→</span>
+          <div class="fb">Exportás sin música</div><span class="fa">→</span>
+          <div class="fb">TikTok + audio TikTok 20%</div><span class="fa">→</span>
+          <div class="fb fe">Instagram + audio IG 20%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sb">
+      <p class="st">Stories diarias — estructura semanal</p>
+      <div class="srow7">
+        <div class="sd"><p class="sdn">Lun</p><p class="sdc">Poll sobre el destino</p></div>
+        <div class="sd"><p class="sdn">Mar</p><p class="sdc">Behind the scenes edición</p></div>
+        <div class="sd"><p class="sdn">Mié</p><p class="sdc">Quiz de precios</p></div>
+        <div class="sd"><p class="sdn">Jue</p><p class="sdc">Foto local + tip en texto</p></div>
+        <div class="sd"><p class="sdn">Vie</p><p class="sdc">Q&A: preguntame sobre [ciudad]</p></div>
+        <div class="sd"><p class="sdn">Sáb</p><p class="sdc">Joya oculta del destino</p></div>
+        <div class="sd"><p class="sdn">Dom</p><p class="sdc">Preview semana siguiente</p></div>
+      </div>
+    </div>
+
+    <div class="sb">
+      <p class="st">1 viaje → múltiples piezas</p>
+      <div class="flow">
+        <div class="fb">Material del viaje</div><span class="fa">→</span>
+        <div class="fb">YouTube guía larga</div><span class="fa">→</span>
+        <div class="fb">3-5 TikToks / Reels</div><span class="fa">→</span>
+        <div class="fb">Carrusel Instagram</div><span class="fa">→</span>
+        <div class="fb">Stories Q&A</div><span class="fa">→</span>
+        <div class="fb fe">Blog + afiliados</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOOKS -->
+<div id="p-hooks" class="panel">
+  <div class="sb">
+    <p class="st">Banco de hooks — 30 aperturas adaptables</p>
+    <p class="note">Los primeros 3 segundos definen si el algoritmo distribuye el video. Adaptá destino y número en cada uno.</p>
+
+    <div class="hs">
+      <p class="hst" style="color:var(--coral);">Comparación — generan debate y comentarios</p>
+      <div class="hr2"><p class="htype">Precio vs precio</p><div><p class="htxt">"Esta misma semana cuesta €[X] en [A] y €[X] en [B]."</p><p class="hnote">El número en pantalla. El debate se activa solo.</p></div></div>
+      <div class="hr2"><p class="htype">Anti-expectativa</p><div><p class="htxt">"Creía que [Ciudad] era cara. Fui. Me equivocaba."</p><p class="hnote">Genera curiosidad inmediata.</p></div></div>
+      <div class="hr2"><p class="htype">Dos opciones</p><div><p class="htxt">"Con €500, ¿a cuál de estas dos ciudades viajarías?"</p><p class="hnote">El 100% de la audiencia tiene una opinión.</p></div></div>
+      <div class="hr2"><p class="htype">Un día vs más</p><div><p class="htxt">"Hice [Ciudad] en un día. Después volví [X] más. La diferencia:"</p><p class="hnote">Tu formato propio. Único en el nicho en español.</p></div></div>
+    </div>
+
+    <div class="hs">
+      <p class="hst" style="color:var(--teal);">Valor — generan guardados</p>
+      <div class="hr2"><p class="htype">El número</p><div><p class="htxt">"[X] días en [Ciudad] con €[X]. Acá está el desglose."</p><p class="hnote">Los números específicos detienen el scroll.</p></div></div>
+      <div class="hr2"><p class="htype">Insider</p><div><p class="htxt">"El truco que usan los locales para [resultado] en [Ciudad]."</p><p class="hnote">FOMO de información exclusiva.</p></div></div>
+      <div class="hr2"><p class="htype">Los baños</p><div><p class="htxt">"Nadie te dice que en [Ciudad] los baños [dato]. Acá el mapa."</p><p class="hnote">Tu sello. Hiper-práctico = guardado automático.</p></div></div>
+      <div class="hr2"><p class="htype">El error</p><div><p class="htxt">"El error que comete el 90% de los turistas en [Ciudad]."</p><p class="hnote">El miedo a equivocarse activa la atención.</p></div></div>
+    </div>
+
+    <div class="hs">
+      <p class="hst" style="color:var(--purple);">Personal — generan conexión y comunidad</p>
+      <div class="hr2"><p class="htype">Historia</p><div><p class="htxt">"El momento más incómodo que tuve viajando sola en [Ciudad]. Y cómo lo resolví."</p><p class="hnote">Vulnerabilidad + resolución = identificación profunda.</p></div></div>
+      <div class="hr2"><p class="htype">Aprendizaje</p><div><p class="htxt">"Lo que aprendí después de visitar [X] capitales europeas sola."</p><p class="hnote">Experiencia acumulada como autoridad real.</p></div></div>
+      <div class="hr2"><p class="htype">Opinión directa</p><div><p class="htxt">"[Ciudad] me decepcionó / me sorprendió. La razón:"</p><p class="hnote">Las opiniones directas son oro. La gente quiere saber si vale la pena.</p></div></div>
+    </div>
+
+    <div class="hs">
+      <p class="hst" style="color:var(--blue);">EEUU — para cuando llegue el momento <span class="usbadge">EEUU</span></p>
+      <div class="hr2"><p class="htype">El contraste</p><div><p class="htxt">"Vine de recorrer capitales europeas por €40/día. Fui a [ciudad EEUU]. La diferencia:"</p><p class="hnote">El contraste Europa/EEUU genera curiosidad enorme en audiencia latina.</p></div></div>
+      <div class="hr2"><p class="htype">El mito</p><div><p class="htxt">"Todo el mundo dice que EEUU es caro. Yo fui con €[X] al día. Lo que descubrí:"</p><p class="hnote">EEUU barato es el tema más buscado por la audiencia latinoamericana.</p></div></div>
+      <div class="hr2"><p class="htype">El local</p><div><p class="htxt">"[Ciudad EEUU] sin trampa turística: lo que hacen los que viven ahí."</p><p class="hnote">Mismo método que Europa, aplicado a EEUU. Sin reposicionamiento.</p></div></div>
+    </div>
+  </div>
+</div>
+
+</div>
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('p-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function tog(header) {
+  const body = header.nextElementSibling;
+  const arr = header.querySelector('.arr');
+  body.classList.toggle('open');
+  arr.classList.toggle('open');
+}
+</script>
+</body>
+</html>
