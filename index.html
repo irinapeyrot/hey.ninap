@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HeyNinaP</title>
+<title>HeyNinaP — Viajes con presupuesto real</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
@@ -179,6 +179,24 @@ section { padding: 5rem 2rem; }
 .pe-num { font-family: var(--sg); font-size: 11px; color: var(--miel); font-weight: 700; display: block; margin-bottom: 4px; }
 .pe-nombre { font-family: var(--sg); font-size: 14px; font-weight: 700; color: var(--blanco); margin-bottom: 6px; }
 .pe-desc { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.65; }
+
+/* DECLARACIÓN DE POSICIONAMIENTO */
+.dq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 2.5rem; }
+.dq-card { border-radius: 12px; padding: 1.75rem; }
+.dq-label { font-family: var(--sg); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+.dq-texto { font-size: 14px; color: #444; line-height: 1.8; }
+.dq-quien { background: var(--niebla); border: 1px solid #dce8ff; grid-column: 1 / -1; }
+.dq-quien .dq-label { color: var(--indigo); }
+.dq-si { background: #f3faf5; border: 1px solid #c8e6d0; }
+.dq-si .dq-label { color: #3a8a52; }
+.dq-no { background: #fff8f8; border: 1px solid #f5dada; }
+.dq-no .dq-label { color: #c0392b; }
+.dq-mensaje { background: var(--noche); border: 1px solid var(--noche); grid-column: 1 / -1; }
+.dq-mensaje .dq-label { color: var(--miel); }
+.dq-idea { font-family: 'Caveat', cursive; font-size: 26px; color: var(--blanco); line-height: 1.4; margin-top: 0.5rem; }
+.dq-percepcion { background: var(--niebla); border: 1px solid #dce8ff; grid-column: 1 / -1; }
+.dq-percepcion .dq-label { color: var(--indigo); }
+.dq-percepcion .dq-texto { font-style: italic; font-size: 15px; color: var(--noche); }
 
 /* ENTREVISTAS PENDIENTES */
 .entrevistas-nota { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-left: 3px solid var(--miel); border-radius: 12px; padding: 1.75rem 2rem; margin-top: 0.5rem; }
@@ -407,14 +425,14 @@ footer {
       <path fill="#5e7fcc" d="M555.05,260.67c-15.54,22.66-29.82,44.85-42.83,68.65-43.27,79.16-67.91,166.33-71.38,256.55v53.27c1.79,49.63,9.55,97.69,20.61,146,5.87,25.64,10.01,58.69-15.5,69.74-31.46,13.62-63.15-.46-89.11-20.8-62-48.58-123.35-148.37-166.12-216.74l-41.99-67.11c-24.52-39.19-48.14-77.89-70.69-118.18l-20.56-32.5c-10.69-16.9-17.36-35.06,0-46.19,9.97-6.39,21.62-7.81,33.49-8.53,23.88-1.43,45.3,6.7,63.65,21.51,14.92,12.04,28.28,24.62,40.33,39.75,15.44,19.37,28.74,39.24,41.27,60.69l40.6,69.46,41.72,69.13,10.09,14.16c1.32-6.34-.55-10.89-.51-16.73.4-53.09,6.46-105.62,18.14-157.6,12.88-57.32,33.74-111.69,61.65-163.2,19.81-36.56,41.7-71.08,67.2-103.78,13.51-17.33,27.47-32.71,43.02-48.06,13.32-13.16,27.36-23.84,44.95-31.25,38.31-16.14,81.38-18.54,121.11-6.16,29.66,9.24,51.76,31.43,61.29,60.65,15.83,48.54,3.19,110.56-11.36,159.92l24.56-13.69,51.38-36.62c41.43-29.53,89.9-67.52,135.95-86.91,20.4-8.59,46.46-13.53,53.35,8.63,1.67,5.37,2.47,11.17,0,16.64-5.85,12.96-13.14,24.79-22.33,35.62l-23.05,27.14c-30.52,32.86-63.73,61.95-98.63,90.16l-39.86,32.21c-16.18,13.08-32.57,24.81-50.58,35.27-36.25,21.05-74.92,32.49-115.83,20.23-10.41-3.12-18.39-9.1-23.45-18.78-17.86-34.15-3.79-94.8,6.11-133.46,5.82-22.74,11.86-44.51,15.24-67.68,1.26-8.61,1.6-17.01-1.13-24.81-1.83-5.23-6.56-7.55-11.92-7.12-34.87,2.83-59.61,42.39-78.89,70.5Z"/>
       <path fill="#d4a84b" d="M195.96,807.78c-22.14,11.23-61.5-.15-81.71-16.86-16.78-13.88-23.66-36.05-15.6-56.14,3.52-8.79,10.01-14.97,18.79-18.32,24.94-9.53,52.62-2.24,70.03,18.2,19.14,22.48,28.47,63,8.49,73.13Z"/>
     </svg>
-    <p class="hero-eyebrow">HeyNinaP</p>
+    <p class="hero-eyebrow">HeyNinaP · Viajes con presupuesto real</p>
     <h1 class="hero-title">
       Viajo sola.
       <span class="hero-title-accent">Sin excusas.</span>
     </h1>
     <p class="hero-mano">con lo que tengo, a donde quiero.</p>
     <p class="hero-body">
-      Soy Nina, soy uruguaya. Recorro capitales europeas y el mundo en modo mochilera — con <strong>presupuesto real</strong>, sin lujos que no valen la pena, y sin perderme nada que sí vale.<br><br>
+      Soy Nina, soy uruguaya. Recorro el mundo en modo mochilera — con <strong>presupuesto real</strong>, sin lujos que no valen la pena, y sin perderme nada que sí vale.<br><br>
       Esta cuenta existe para que <strong>ninguna mujer deje de ver el mundo</strong> por las mismas limitaciones que yo tuve que derribar para empezar.
     </p>
   </div>
@@ -425,7 +443,7 @@ footer {
   <div class="container">
     <div class="sobre-grid">
       <div class="sobre-photo-wrap reveal">
-        <img src="assets/nina.jpeg" class="sobre-photo">
+        <img src="yo.jpeg" alt="Nina en el Puente de Brooklyn, Nueva York" class="sobre-photo">
         <div class="sobre-photo-badge">
           <p class="sobre-badge-hand">Brooklyn Bridge, NY</p>
           <p class="sobre-badge-sub">@hey.ninap</p>
@@ -438,7 +456,7 @@ footer {
         <p class="sobre-quote">"Viajo porque esta es la historia que yo quiero contar de mi vida."</p>
         <p class="sobre-body">En 2018 hice mi primer viaje sola — con los recursos que tenía, sin red de seguridad, sin saber bien cómo. Y en lugar de cerrarme, me abrió algo. Hoy recorro el mundo con presupuesto real y comparto exactamente lo que aprendí para que otras mujeres no tengan que aprenderlo solas.</p>
         <div class="creds">
-          <span class="cred">+20 capitales europeas</span>
+          <span class="cred">+20 destinos recorridos</span>
           <span class="cred">Partes de EEUU</span>
           <span class="cred">Modo mochilera</span>
           <span class="cred">Presupuesto real</span>
@@ -452,7 +470,7 @@ footer {
             <li>Construyo valor antes de pedir que compren. La audiencia que llega convencida no necesita que la convenza.</li>
             <li>Las que opinan no son las que viajan. Las que viajan están demasiado ocupadas viviendo para juzgar.</li>
             <li>Voy a mi ritmo. Esta marca se construye desde el disfrute, no desde la obligación.</li>
-            <li>Tengo más de 20 capitales europeas recorridas sola, con presupuesto real. Tengo una red que me empuja. Y tengo el conocimiento para dar lo que prometo.</li>
+            <li>Tengo más de 20 destinos recorridos sola, con presupuesto real. Tengo una red que me empuja. Y tengo el conocimiento para dar lo que prometo.</li>
           </ul>
         </div>
       </div>
@@ -482,6 +500,47 @@ footer {
     </div>
     <div class="gc-tagline-wrap">
       <p class="gc-tagline">Para que la única razón por la que no viajes sea que <span>todavía no compraste el pasaje.</span></p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<hr class="divider">
+
+<!-- ── POSICIONAMIENTO QUEEN ── -->
+<section id="declaracion">
+  <div class="container">
+    <span class="eyebrow">Declaración de posicionamiento</span>
+    <h2 class="section-title">Por qué soy<br><span>la persona indicada.</span></h2>
+
+    <div class="dq-grid reveal">
+
+      <div class="dq-card dq-quien">
+        <p class="dq-label">Soy la persona indicada porque...</p>
+        <p class="dq-texto">Atravesé el miedo de viajar sola por primera vez y lo hice igual. Recorrí más de 20 destinos sola, con presupuesto latinoamericano real, aprendiendo a moverme sin depender de nadie y con lo que tenía. De esa experiencia aprendí que el miedo no desaparece — aprendés a moverte con él igual. Que viajar sola te transforma de una forma que acompañada no podés. Y que la información correcta es la diferencia entre paralizarse e ir.</p>
+      </div>
+
+      <div class="dq-card dq-si">
+        <p class="dq-label">✓ Sí trabajo con...</p>
+        <p class="dq-texto">Mujeres latinoamericanas que quieren animarse a viajar solas por primera vez — y mujeres que ya viajan solas y quieren hacerlo con más inteligencia y menos gasto. En las dos tiene que haber una decisión real: quiero ir, y voy a hacer lo que sea para lograrlo.</p>
+      </div>
+
+      <div class="dq-card dq-no">
+        <p class="dq-label">✗ No trabajo con...</p>
+        <p class="dq-texto">Quienes buscan viajar en lujo o con todo incluido — eso no es lo que hago ni lo que enseño. Y tampoco con quienes no están listas para dar el paso. El miedo, la inseguridad y la incertidumbre son bienvenidos — son parte del proceso. Pero si no hay una decisión real de atravesarlos, no hay nada que yo pueda hacer.</p>
+      </div>
+
+      <div class="dq-card dq-mensaje">
+        <p class="dq-label">Mi mensaje central este año</p>
+        <p class="dq-idea">"Ya tenés lo que necesitás para empezar.<br>Solo falta la decisión."</p>
+      </div>
+
+      <div class="dq-card dq-percepcion">
+        <p class="dq-label">Si alguien ve mi contenido, debería pensar...</p>
+        <p class="dq-texto">"Ella recorrió más de 20 destinos sola con presupuesto real — si me dice que se puede, le creo."</p>
+      </div>
+
     </div>
   </div>
 </section>
@@ -612,16 +671,16 @@ footer {
       <!-- DOLORES Y DESEOS -->
       <div class="dd-grid" style="margin-bottom:2rem;">
         <div class="dd-card dd-dolores">
-          <p class="dd-titulo">Sus dolores</p>
-          <p class="dd-item">No sabe cuánto cuesta de verdad viajar a Europa — los números que encuentra no se parecen a su realidad.</p>
+          <p class="dd-titulo">😔 Sus dolores</p>
+          <p class="dd-item">No sabe cuánto cuesta de verdad viajar sola — los números que encuentra no se parecen a su realidad.</p>
           <p class="dd-item">Quiere viajar pero no tiene con quién ir, y asume que eso la frena.</p>
           <p class="dd-item">Le da bronca el contenido aspiracional que no le sirve: presupuestos en dólares, guías en inglés, cuentas que no hablan de lo que a ella le preocupa.</p>
           <p class="dd-item">Siente que el miedo de que algo salga mal la paraliza más que la falta de dinero.</p>
           <p class="dd-item">Se siente sola con este deseo — como si fuera rara por quererlo.</p>
         </div>
         <div class="dd-card dd-deseos">
-          <p class="dd-titulo">Sus deseos</p>
-          <p class="dd-item">Hacer su primer viaje sola a Europa antes de que pase otro año.</p>
+          <p class="dd-titulo">✨ Sus deseos</p>
+          <p class="dd-item">Hacer su primer viaje sola antes de que pase otro año.</p>
           <p class="dd-item">Saber cuánto le va a costar de verdad — un número real que le diga "con esto alcanza".</p>
           <p class="dd-item">Sentirse capaz de moverse sola por una ciudad desconocida y resolverlo todo.</p>
           <p class="dd-item">Demostrar — principalmente a sí misma — que puede hacerlo con lo que tiene.</p>
@@ -631,7 +690,7 @@ footer {
 
       <div class="avatar-grid">
         <div class="avatar-profile">
-          <img src="assets/valentina.png" alt="Valentina — avatar cliente real" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:cover;max-height:280px;">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3E9Gyn97FDY1N1B6OiklEsxEHce/hf_20260618_204714_19f04253-9d1e-487c-94e6-7585e15a9b71.png" alt="Valentina — avatar cliente ideal HeyNinaP" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:cover;max-height:280px;">
           <div style="background:var(--noche);border-radius:0 0 12px 12px;padding:0.875rem 1rem;">
             <p style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:var(--blanco);margin-bottom:1px;">Valentina</p>
             <p style="font-size:12px;color:var(--indigo);margin-bottom:8px;">28 años · Buenos Aires · Relación de dependencia</p>
@@ -644,11 +703,11 @@ footer {
           </div>
         </div>
         <div class="avatar-pillars">
-          <div class="pilar-card"><p class="pilar-num">02 · Obstáculos</p><p class="pilar-text">No sabe cuánto cuesta de verdad viajar a Europa. No tiene con quién ir y asume que eso significa que no puede. Lleva meses posponiendo.</p></div>
-          <div class="pilar-card"><p class="pilar-num">05 · Objetivos</p><p class="pilar-text">Hacer su primer viaje sola a Europa antes de que pase otro año. Demostrar — principalmente a sí misma — que puede hacerlo con lo que tiene.</p></div>
+          <div class="pilar-card"><p class="pilar-num">02 · Obstáculos</p><p class="pilar-text">No sabe cuánto cuesta de verdad viajar sola. No tiene con quién ir y asume que eso significa que no puede. Lleva meses posponiendo.</p></div>
+          <div class="pilar-card"><p class="pilar-num">05 · Objetivos</p><p class="pilar-text">Hacer su primer viaje sola antes de que pase otro año. Demostrar — principalmente a sí misma — que puede hacerlo con lo que tiene.</p></div>
           <div class="pilar-card"><p class="pilar-num">06 · Miedos</p><p class="pilar-text">Que algo salga mal y no tener a nadie al lado para resolverlo. Que el dinero no alcance a mitad del viaje.</p></div>
           <div class="pilar-card"><p class="pilar-num">09 · En qué piensa</p><p class="pilar-text">"¿Cuándo voy a tener suficiente plata?" "¿Y si me pasa algo?" "¿Tengo que esperar a que alguien pueda acompañarme?"</p></div>
-          <div class="pilar-card"><p class="pilar-num">10 · Creencias</p><p class="pilar-text">Que viajar sola es para mujeres con más valentía, más dinero o más experiencia. Que Europa es cara.</p></div>
+          <div class="pilar-card"><p class="pilar-num">10 · Creencias</p><p class="pilar-text">Que viajar sola es para mujeres con más valentía, más dinero o más experiencia. Que viajar sola es caro.</p></div>
           <div class="pilar-card"><p class="pilar-num">11 · Identidad</p><p class="pilar-text">No se ve a sí misma como viajera. Todavía no hizo el click de "eso también puede ser yo".</p></div>
           <div class="pilar-card"><p class="pilar-num">13 · Resentimientos</p><p class="pilar-text">Le da bronca el contenido de viajes que no habla de su realidad. Siente que la información útil en español no existe o está hecha para otra gente.</p></div>
           <div class="pilar-card"><p class="pilar-num">17 · Plataformas</p><p class="pilar-text">Instagram y TikTok pasiva. YouTube para investigar. Guarda posts "para cuando esté lista".</p></div>
@@ -970,7 +1029,7 @@ footer {
           <p class="pe-desc">Problema doloroso, creencia rota, o promesa de solución.</p>
           <div class="pe-ejemplos">
             <p class="pe-ej-dark">"Creías que Budapest era cara. Estabas equivocada."</p>
-            <p class="pe-ej-dark">"Todo lo que te dijeron sobre viajar sola en Europa está mal."</p>
+            <p class="pe-ej-dark">"Todo lo que te dijeron sobre viajar sola está mal."</p>
             <p class="pe-ej-dark">"¿Vale la pena Praga en 2026? Quédate que te lo cuento."</p>
           </div>
         </div>
@@ -1063,7 +1122,7 @@ footer {
 
 <!-- ── FOOTER ── -->
 <footer>
-  <a href="contenido.html" class="footer-logo" title="" style="cursor:default;opacity:1;">
+  <a href="heyninap_plan_mensual_v2.html" class="footer-logo" title="" style="cursor:default;opacity:1;">
     <svg viewBox="0 0 1048 1091" xmlns="http://www.w3.org/2000/svg">
       <path fill="#ebf0ff" d="M555.05,260.67c-15.54,22.66-29.82,44.85-42.83,68.65-43.27,79.16-67.91,166.33-71.38,256.55v53.27c1.79,49.63,9.55,97.69,20.61,146,5.87,25.64,10.01,58.69-15.5,69.74-31.46,13.62-63.15-.46-89.11-20.8-62-48.58-123.35-148.37-166.12-216.74l-41.99-67.11c-24.52-39.19-48.14-77.89-70.69-118.18l-20.56-32.5c-10.69-16.9-17.36-35.06,0-46.19,9.97-6.39,21.62-7.81,33.49-8.53,23.88-1.43,45.3,6.7,63.65,21.51,14.92,12.04,28.28,24.62,40.33,39.75,15.44,19.37,28.74,39.24,41.27,60.69l40.6,69.46,41.72,69.13,10.09,14.16c1.32-6.34-.55-10.89-.51-16.73.4-53.09,6.46-105.62,18.14-157.6,12.88-57.32,33.74-111.69,61.65-163.2,19.81-36.56,41.7-71.08,67.2-103.78,13.51-17.33,27.47-32.71,43.02-48.06,13.32-13.16,27.36-23.84,44.95-31.25,38.31-16.14,81.38-18.54,121.11-6.16,29.66,9.24,51.76,31.43,61.29,60.65,15.83,48.54,3.19,110.56-11.36,159.92l24.56-13.69,51.38-36.62c41.43-29.53,89.9-67.52,135.95-86.91,20.4-8.59,46.46-13.53,53.35,8.63,1.67,5.37,2.47,11.17,0,16.64-5.85,12.96-13.14,24.79-22.33,35.62l-23.05,27.14c-30.52,32.86-63.73,61.95-98.63,90.16l-39.86,32.21c-16.18,13.08-32.57,24.81-50.58,35.27-36.25,21.05-74.92,32.49-115.83,20.23-10.41-3.12-18.39-9.1-23.45-18.78-17.86-34.15-3.79-94.8,6.11-133.46,5.82-22.74,11.86-44.51,15.24-67.68,1.26-8.61,1.6-17.01-1.13-24.81-1.83-5.23-6.56-7.55-11.92-7.12-34.87,2.83-59.61,42.39-78.89,70.5Z"/>
       <path fill="#ebf0ff" d="M195.96,807.78c-22.14,11.23-61.5-.15-81.71-16.86-16.78-13.88-23.66-36.05-15.6-56.14,3.52-8.79,10.01-14.97,18.79-18.32,24.94-9.53,52.62-2.24,70.03,18.2,19.14,22.48,28.47,63,8.49,73.13Z"/>
